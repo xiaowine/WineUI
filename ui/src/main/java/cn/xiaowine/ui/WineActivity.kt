@@ -19,7 +19,7 @@ open class WineActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.collapsingToolbarLayout.apply {
             expandedTitleTextSize = dp2px(context, 30f).toFloat()
-            collapsedTitleTextSize = dp2px(context, 18f).toFloat()
+            collapsedTitleTextSize = dp2px(context, 20f).toFloat()
             setCollapsedTitleTypeface(
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                     Typeface.create(null, 400, false)

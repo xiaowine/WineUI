@@ -108,7 +108,7 @@ class WineSwitch(context: Context) : ConstraintLayout(context) {
         inflate = inflate(context, R.layout.wine_switch, this) as ConstraintLayout
 //        inflate.minimumHeight = Tools.dp2px(context, 60f)
         titleView.apply {
-            setTextSize(TypedValue.COMPLEX_UNIT_SP, 18.25f)
+            setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 paint.typeface = Typeface.create(null, 500, false)
             } else {
@@ -116,7 +116,7 @@ class WineSwitch(context: Context) : ConstraintLayout(context) {
             }
         }
         summaryView.apply {
-            setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f)
+            setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
         }
         iconView.apply {
             layoutParams = LayoutParams(dp2px(context, 45f), dp2px(context, 45f))

@@ -8,22 +8,22 @@ class APage : WinePage() {
     init {
         initPage {
             title {
-                text = "Text"
+                text = "标题"
             }
             text {
-                title = "This is a title"
+                title = "这是一个标题"
             }
             text {
                 setIcon(R.drawable.ic_launcher_background)
-                title = "This is a title"
+                title = "这是一个带图标的标题"
             }
             text {
-                title = "Title with Summary"
-                summary = "This is a summary"
+                title = "这是一个摘要"
+                summary = "这是一个带摘要的标题"
             }
             text {
-                title = "Title with Summary"
-                summary = "This is a summary"
+                title = "这是一个摘要"
+                summary = "这是一个带图标带摘要的标题"
                 setIcon(R.drawable.ic_launcher_background)
             }
             text {

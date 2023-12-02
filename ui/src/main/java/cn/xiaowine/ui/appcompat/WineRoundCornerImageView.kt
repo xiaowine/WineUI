@@ -1,4 +1,4 @@
-package cn.xiaowine.ui.widget
+package cn.xiaowine.ui.appcompat
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -10,8 +10,8 @@ import androidx.appcompat.widget.AppCompatImageView
 class WineRoundCornerImageView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : AppCompatImageView(context, attrs, defStyleAttr) {
     private var paint: Paint? = null
     private var paint2: Paint? = null
-    private val roundWidth: Int = 25
-    private val roundHeight: Int = 25
+    val roundWidth: Int = 25
+    val roundHeight: Int = 25
 
     constructor(context: Context) : this(context, null, 0)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)

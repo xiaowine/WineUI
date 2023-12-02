@@ -16,7 +16,7 @@ class WineTitle(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : App
     init {
         setPadding(0, dp2px(context, 9.75f), 0, dp2px(context, 9.75f))
         setTextColor(context.getColor(R.color.title_color))
-        setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f)
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             paint.typeface = Typeface.create(null, 400, false)
         } else {

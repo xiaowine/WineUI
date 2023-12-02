@@ -8,9 +8,8 @@ import cn.xiaowine.ui.R
 import cn.xiaowine.ui.Tools.dp2px
 import java.lang.reflect.Field
 
-class HyperSwitch(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : SwitchCompat(context, attrs, defStyleAttr) {
-    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
-    constructor(context: Context) : this(context, null)
+class HyperSwitch(context: Context, attrs: AttributeSet) : SwitchCompat(context, attrs) {
+
     init {
         background = null
         setThumbResource(R.drawable.switch_thumb)
@@ -25,4 +24,5 @@ class HyperSwitch(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : S
         mSwitchWidth.isAccessible = true
         mSwitchWidth.setInt(this, dp2px(context, 56f))
     }
+
 }

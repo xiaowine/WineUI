@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.os.Build
-import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
 import android.widget.ImageView
@@ -15,7 +14,6 @@ import androidx.constraintlayout.widget.ConstraintSet
 import cn.xiaowine.ui.R
 import cn.xiaowine.ui.Tools.dp2px
 import cn.xiaowine.ui.appcompat.HyperSwitch
-
 
 class WineSwitch(context: Context) : ConstraintLayout(context) {
     val inflate: ConstraintLayout
@@ -78,6 +76,7 @@ class WineSwitch(context: Context) : ConstraintLayout(context) {
             }
         }
     }
+
     fun setIcon(resId: Int) {
         val constraintLayout = inflate.findViewById<ConstraintLayout>(R.id.constraintLayout)
         ConstraintSet().apply {
@@ -132,11 +131,11 @@ class WineSwitch(context: Context) : ConstraintLayout(context) {
         ConstraintSet().apply {
             clone(constraintLayout)
 //            connect(R.id.linearLayout, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0)
-            connect(R.id.switch_view, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END,0)
-            connect(R.id.switch_view, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP,0)
-            connect(R.id.switch_view, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM,0)
-            connect(R.id.imageView, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP,0)
-            connect(R.id.imageView, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM,0)
+            connect(R.id.switch_view, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0)
+            connect(R.id.switch_view, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
+            connect(R.id.switch_view, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
+            connect(R.id.imageView, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
+            connect(R.id.imageView, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
             connect(R.id.linearLayout, ConstraintSet.START, R.id.imageView, ConstraintSet.END, 0)
             applyTo(constraintLayout)
         }

@@ -7,7 +7,6 @@ import android.widget.LinearLayout
 import cn.xiaowine.ui.R
 import cn.xiaowine.ui.Tools.dp2px
 
-
 class WineLine(context: Context) : View(context) {
 
 

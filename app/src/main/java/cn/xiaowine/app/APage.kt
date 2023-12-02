@@ -18,29 +18,29 @@ class APage : WinePage() {
                 title = "这是一个带图标的标题"
             }
             text {
-                title = "这是一个摘要"
-                summary = "这是一个带摘要的标题"
+                title ="这是一个带摘要的标题"
+                summary = "这是一个摘要"
             }
             text {
-                title = "这是一个摘要"
-                summary = "这是一个带图标带摘要的标题"
+                title = "这是一个带图标带摘要的标题"
+                summary = "这是一个摘要"
                 setIcon(R.drawable.ic_launcher_background)
             }
             text {
-                title = "Title with Summary"
-                summary = "This is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summary"
+                title = "带摘要的标题"
+                summary = "这是摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘要"
             }
             text {
-                title = "Title with Summary"
-                summary = "This is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summaryThis is a summary"
+                title = "带摘要带图标的标题"
+                summary = "这是摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘要"
                 setIcon(R.drawable.ic_launcher_background)
             }
             line()
             title {
-                text = "Switch"
+                text = "开关"
             }
             switch {
-                title = "Switch"
+                title = "开关"
                 isChecked = true
                 onClick {
                     Toast.makeText(context, "onClick value:$it", Toast.LENGTH_SHORT).show()
@@ -50,8 +50,7 @@ class APage : WinePage() {
                 }
             }
             switch {
-                title = "Switch"
-                isChecked = true
+                title = "开关"
                 onClick {
                     Toast.makeText(context, "onClick value:$it", Toast.LENGTH_SHORT).show()
                 }
@@ -61,9 +60,9 @@ class APage : WinePage() {
                 setIcon(R.drawable.ic_launcher_background)
             }
             switch {
-                title = "Switch with Summary"
-                summary = "Summary"
-                isChecked = false
+                title = "带摘要的开关"
+                summary = "这是一个摘要"
+                isChecked = true
                 onClick {
                     Toast.makeText(context, "onClick value:$it", Toast.LENGTH_SHORT).show()
                 }
@@ -72,8 +71,8 @@ class APage : WinePage() {
                 }
             }
             switch {
-                title = "Switch with Summary"
-                summary = "Summary"
+                title = "带摘要带图标的开关"
+                summary = "这是一个摘要"
                 isChecked = false
                 onClick {
                     Toast.makeText(context, "onClick value:$it", Toast.LENGTH_SHORT).show()

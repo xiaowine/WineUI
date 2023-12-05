@@ -34,6 +34,7 @@ android {
 
 dependencies {
 //    implementation(libs.core.ktx)
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0-rc01")
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(project(mapOf("path" to ":ui")))

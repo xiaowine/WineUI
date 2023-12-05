@@ -27,7 +27,6 @@
             <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar"
                     android:background="@color/background_color"
-                    app:title="@string/app_name"
                     app:layout_collapseMode="pin"
                     android:layout_width="match_parent"
                     android:layout_height="?actionBarSize" />

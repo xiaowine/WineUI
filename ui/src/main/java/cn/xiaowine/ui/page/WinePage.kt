@@ -9,14 +9,18 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import cn.xiaowine.ui.R
 import cn.xiaowine.ui.Tools.dp2px
+import cn.xiaowine.ui.viewmodel.PageViewModel
 import cn.xiaowine.ui.widget.WineLine
 import cn.xiaowine.ui.widget.WineSwitch
 import cn.xiaowine.ui.widget.WineText
 import cn.xiaowine.ui.widget.WineTitle
 
 open class WinePage : Fragment() {
+    val pageViewModel: PageViewModel by lazy { ViewModelProvider(requireActivity())[PageViewModel::class.java] }
+
     val viewList = ArrayList<Pair<Class<out View>, View.() -> Unit>>()
 
     val rootView: LinearLayout by lazy {
@@ -59,5 +63,9 @@ open class WinePage : Fragment() {
     }
     fun ArrayList<Pair<Class<out View>, View.() -> Unit>>.title(init: WineTitle.() -> Unit) {
         this.add(Pair(WineTitle::class.java) { init.invoke(this as WineTitle) })
+    }
+    fun toPage(page: Class<out WinePage>) {
+        Log.d("WinePage", "toPage")
+        pageViewModel.nowPage.postValue(page)
     }
 }

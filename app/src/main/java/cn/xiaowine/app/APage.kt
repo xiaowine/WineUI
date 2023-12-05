@@ -12,13 +12,17 @@ class APage : WinePage() {
             }
             text {
                 title = "这是一个标题"
+                onClick {
+                    toPage(BPage::class.java)
+                    Toast.makeText(context, "onClick value:", Toast.LENGTH_SHORT).show()
+                }
             }
             text {
                 setIcon(R.drawable.ic_launcher_background)
                 title = "这是一个带图标的标题"
             }
             text {
-                title ="这是一个带摘要的标题"
+                title = "这是一个带摘要的标题"
                 summary = "这是一个摘要"
             }
             text {
@@ -28,11 +32,13 @@ class APage : WinePage() {
             }
             text {
                 title = "带摘要的标题"
-                summary = "这是摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘要"
+                summary =
+                    "这是摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘要"
             }
             text {
                 title = "带摘要带图标的标题"
-                summary = "这是摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘要"
+                summary =
+                    "这是摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘摘要"
                 setIcon(R.drawable.ic_launcher_background)
             }
             line()

@@ -14,7 +14,6 @@ class APage : WinePage() {
                 title = "这是一个标题"
                 onClick {
                     toPage(BPage::class.java)
-                    Toast.makeText(context, "onClick value:", Toast.LENGTH_SHORT).show()
                 }
             }
             text {

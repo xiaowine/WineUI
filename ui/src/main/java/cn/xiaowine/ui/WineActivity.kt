@@ -3,6 +3,7 @@ package cn.xiaowine.ui
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import cn.xiaowine.ui.Tools.dp2px
@@ -16,6 +17,8 @@ open class WineActivity : AppCompatActivity() {
     val pageViewModel: PageViewModel by lazy { ViewModelProvider(this)[PageViewModel::class.java] }
 
     val pageItems: MutableList<PageData> = mutableListOf()
+
+    val pageQueue: MutableList<Class<out WinePage>> = mutableListOf()
 
     private lateinit var binding: ActivityWineBinding
 
@@ -42,8 +45,20 @@ open class WineActivity : AppCompatActivity() {
             )
         }
         pageViewModel.nowPage.observe(this) {
+            pageQueue.add(it)
             toPage(it)
         }
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (pageQueue.size==1) {
+                    finish()
+                    return
+                }
+                toPage(pageQueue[pageQueue.lastIndex - 1])
+                pageQueue.remove(pageQueue.last())
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, callback)
     }
 
     fun registerPage(vararg page: PageData) {
@@ -51,19 +66,20 @@ open class WineActivity : AppCompatActivity() {
             pageItems.add(it)
         }
         val home = pageItems.singleOrNull { it.isHome } ?: throw Exception("No home page")
-        pageViewModel.nowPage.value = home.page
+        pageViewModel.nowPage.postValue(home.page)
     }
 
     fun toPage(page: Class<out WinePage>) {
         val find = pageItems.find { it.page == page } ?: throw Exception("No page")
-        supportFragmentManager
-            .beginTransaction()
-            .replace(binding.page.id, page, null)
-            .commit()
         binding.apply {
+            scrollView.scrollX = 0
             collapsingToolbarLayout.apply {
                 title = find.title ?: getString(find.titleRes)
             }
         }
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.page, page, null)
+            .commit()
     }
 }

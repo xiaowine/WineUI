@@ -7,6 +7,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import cn.xiaowine.ui.Tools.dp2px
+import cn.xiaowine.ui.data.TogglePageDate
 import cn.xiaowine.ui.data.PageData
 import cn.xiaowine.ui.databinding.ActivityWineBinding
 import cn.xiaowine.ui.page.WinePage
@@ -45,12 +46,22 @@ open class WineActivity : AppCompatActivity() {
             )
         }
         pageViewModel.nowPage.observe(this) {
-            pageQueue.add(it)
-            toPage(it)
+            if (it.now == null) {
+                pageQueue.remove(it.last)
+                if (pageQueue.isEmpty()) {
+                    finish()
+                    return@observe
+                }
+                toPage(pageQueue.last())
+            } else {
+                pageQueue.add(it.now)
+                toPage(it.now)
+            }
+
         }
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if (pageQueue.size==1) {
+                if (pageQueue.size == 1) {
                     finish()
                     return
                 }
@@ -66,7 +77,7 @@ open class WineActivity : AppCompatActivity() {
             pageItems.add(it)
         }
         val home = pageItems.singleOrNull { it.isHome } ?: throw Exception("No home page")
-        pageViewModel.nowPage.postValue(home.page)
+        pageViewModel.nowPage.postValue(TogglePageDate(home.page, null))
     }
 
     fun toPage(page: Class<out WinePage>) {
@@ -80,6 +91,6 @@ open class WineActivity : AppCompatActivity() {
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.page, page, null)
-            .commit()
+            .commitNow()
     }
 }

@@ -2,8 +2,8 @@ package cn.xiaowine.ui.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import cn.xiaowine.ui.page.WinePage
+import cn.xiaowine.ui.data.TogglePageDate
 
 class PageViewModel : ViewModel() {
-    val nowPage: MutableLiveData<Class<out WinePage>> = MutableLiveData()
+    val nowPage: MutableLiveData<TogglePageDate> = MutableLiveData()
 }

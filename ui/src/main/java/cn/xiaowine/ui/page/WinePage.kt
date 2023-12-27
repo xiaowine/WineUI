@@ -12,18 +12,23 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import cn.xiaowine.ui.R
 import cn.xiaowine.ui.Tools.dp2px
+import cn.xiaowine.ui.annotation.Coroutine
+import cn.xiaowine.ui.data.TogglePageDate
 import cn.xiaowine.ui.viewmodel.PageViewModel
 import cn.xiaowine.ui.widget.WineLine
 import cn.xiaowine.ui.widget.WineSwitch
 import cn.xiaowine.ui.widget.WineText
 import cn.xiaowine.ui.widget.WineTitle
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 open class WinePage : Fragment() {
-    val pageViewModel: PageViewModel by lazy { ViewModelProvider(requireActivity())[PageViewModel::class.java] }
+    private val pageViewModel: PageViewModel by lazy { ViewModelProvider(requireActivity())[PageViewModel::class.java] }
 
-    val viewList = ArrayList<Pair<Class<out View>, View.() -> Unit>>()
+    private val viewList = ArrayList<Pair<Class<out View>, View.() -> Unit>>()
 
-    val rootView: LinearLayout by lazy {
+    private val rootView: LinearLayout by lazy {
         LinearLayout(context).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(dp2px(context, 28f), 0, dp2px(context, 28f), 0)
@@ -31,17 +36,37 @@ open class WinePage : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View = rootView.apply {
-        viewList.forEach {
-            val view = it.first.getDeclaredConstructor(Context::class.java).newInstance(requireContext())
-            addView(view.apply {
-                it.second.invoke(this)
-                findViewById<TextView>(R.id.summary_view)?.let { summaryView ->
-                    if (summaryView.text.isEmpty()) {
-                        summaryView.visibility = View.GONE
-                    }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View = rootView.let {
+        if (this::class.java.getAnnotation(Coroutine::class.java) != null) {
+            CoroutineScope(Dispatchers.Main).launch {
+                addView2Root()
+            }
+        } else {
+            addView2Root()
+        }
+        it
+    }
+
+    private fun addView2Root() {
+        rootView.apply {
+            CoroutineScope(Dispatchers.Main).launch {
+                viewList.forEach {
+                    val view = it.first.getDeclaredConstructor(Context::class.java)
+                        .newInstance(requireContext())
+                    addView(view.apply {
+                        it.second.invoke(this)
+                        findViewById<TextView>(R.id.summary_view)?.let { summaryView ->
+                            if (summaryView.text.isEmpty()) {
+                                summaryView.visibility = View.GONE
+                            }
+                        }
+                    })
                 }
-            })
+            }
         }
     }
 
@@ -61,11 +86,18 @@ open class WinePage : Fragment() {
     fun ArrayList<Pair<Class<out View>, View.() -> Unit>>.switch(init: WineSwitch.() -> Unit) {
         this.add(Pair(WineSwitch::class.java) { init.invoke(this as WineSwitch) })
     }
+
     fun ArrayList<Pair<Class<out View>, View.() -> Unit>>.title(init: WineTitle.() -> Unit) {
         this.add(Pair(WineTitle::class.java) { init.invoke(this as WineTitle) })
     }
+
     fun toPage(page: Class<out WinePage>) {
         Log.d("WinePage", "toPage")
-        pageViewModel.nowPage.postValue(page)
+        pageViewModel.nowPage.postValue(TogglePageDate(page, null))
+    }
+
+    fun backPage() {
+        Log.d("WinePage", "backPage")
+        pageViewModel.nowPage.postValue(TogglePageDate(null, this::class.java))
     }
 }

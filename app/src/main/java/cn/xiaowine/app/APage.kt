@@ -8,6 +8,9 @@ class APage : WinePage() {
     init {
         initPage {
             title {
+                text = this@APage::class.java.simpleName
+            }
+            title {
                 text = "标题"
             }
             text {
@@ -19,6 +22,9 @@ class APage : WinePage() {
             text {
                 setIcon(R.drawable.ic_launcher_background)
                 title = "这是一个带图标的标题"
+                onClick{
+                    backPage()
+                }
             }
             text {
                 title = "这是一个带摘要的标题"

@@ -92,12 +92,10 @@ open class WinePage : Fragment() {
     }
 
     fun toPage(page: Class<out WinePage>) {
-        Log.d("WinePage", "toPage")
         pageViewModel.nowPage.postValue(TogglePageDate(page, null))
     }
 
     fun backPage() {
-        Log.d("WinePage", "backPage")
         pageViewModel.nowPage.postValue(TogglePageDate(null, this::class.java))
     }
 }

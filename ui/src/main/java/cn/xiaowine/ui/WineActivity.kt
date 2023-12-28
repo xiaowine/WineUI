@@ -7,8 +7,8 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import cn.xiaowine.ui.Tools.dp2px
-import cn.xiaowine.ui.data.TogglePageDate
 import cn.xiaowine.ui.data.PageData
+import cn.xiaowine.ui.data.TogglePageDate
 import cn.xiaowine.ui.databinding.ActivityWineBinding
 import cn.xiaowine.ui.page.WinePage
 import cn.xiaowine.ui.viewmodel.PageViewModel
@@ -52,10 +52,10 @@ open class WineActivity : AppCompatActivity() {
                     finish()
                     return@observe
                 }
-                toPage(pageQueue.last())
+                toPage(pageQueue.last(),true)
             } else {
                 pageQueue.add(it.now)
-                toPage(it.now)
+                toPage(it.now,false)
             }
 
         }
@@ -65,7 +65,7 @@ open class WineActivity : AppCompatActivity() {
                     finish()
                     return
                 }
-                toPage(pageQueue[pageQueue.lastIndex - 1])
+                toPage(pageQueue[pageQueue.lastIndex - 1],true)
                 pageQueue.remove(pageQueue.last())
             }
         }
@@ -80,7 +80,7 @@ open class WineActivity : AppCompatActivity() {
         pageViewModel.nowPage.postValue(TogglePageDate(home.page, null))
     }
 
-    fun toPage(page: Class<out WinePage>) {
+    private fun toPage(page: Class<out WinePage>, isExit: Boolean) {
         val find = pageItems.find { it.page == page } ?: throw Exception("No page")
         binding.apply {
             scrollView.scrollX = 0
@@ -89,7 +89,13 @@ open class WineActivity : AppCompatActivity() {
             }
         }
         supportFragmentManager
-            .beginTransaction()
+            .beginTransaction().apply {
+                if (isExit) {
+                    setCustomAnimations(R.animator.slide_left_in, R.animator.slide_right_out, R.animator.slide_right_in, R.animator.slide_left_out)
+                } else {
+                    setCustomAnimations(R.animator.slide_right_in, R.animator.slide_left_out, R.animator.slide_left_in, R.animator.slide_right_out)
+                }
+            }
             .replace(R.id.page, page, null)
             .commitNow()
     }

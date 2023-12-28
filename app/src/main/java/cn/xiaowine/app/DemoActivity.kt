@@ -10,7 +10,8 @@ class DemoActivity : WineActivity() {
         super.onCreate(savedInstanceState)
         registerPage(
             PageData(APage::class.java, isHome = true),
-            PageData(BPage::class.java)
+            PageData(BPage::class.java),
+            PageData(CPage::class.java)
         )
     }
 }

@@ -1,9 +1,11 @@
 package cn.xiaowine.ui.widget
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.os.Build
+import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
 import android.widget.ImageView
@@ -15,7 +17,10 @@ import cn.xiaowine.ui.R
 import cn.xiaowine.ui.Tools.dp2px
 import cn.xiaowine.ui.appcompat.HyperSwitch
 
-class WineSwitch(context: Context) : ConstraintLayout(context) {
+class WineSwitch(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : ConstraintLayout(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
+    constructor(context: Context) : this(context, null)
+
     val inflate: ConstraintLayout
     val titleView: TextView
         get() {
@@ -77,15 +82,9 @@ class WineSwitch(context: Context) : ConstraintLayout(context) {
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     fun setIcon(resId: Int) {
-        val constraintLayout = inflate.findViewById<ConstraintLayout>(R.id.constraintLayout)
-        ConstraintSet().apply {
-            clone(constraintLayout)
-            connect(R.id.linearLayout, ConstraintSet.START, R.id.imageView, ConstraintSet.END, dp2px(context, 60f))
-            applyTo(constraintLayout)
-        }
-        iconView.visibility = VISIBLE
-        iconView.setImageResource(resId)
+        setIcon(context.getDrawable(resId))
     }
 
     fun setIcon(drawable: Drawable?) {

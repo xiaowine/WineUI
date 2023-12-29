@@ -13,12 +13,10 @@ import androidx.lifecycle.ViewModelProvider
 import cn.xiaowine.ui.R
 import cn.xiaowine.ui.Tools.dp2px
 import cn.xiaowine.ui.annotation.Coroutine
+import cn.xiaowine.ui.build.PageBuild
 import cn.xiaowine.ui.data.TogglePageDate
 import cn.xiaowine.ui.viewmodel.PageViewModel
-import cn.xiaowine.ui.widget.WineLine
-import cn.xiaowine.ui.widget.WineSwitch
-import cn.xiaowine.ui.widget.WineText
-import cn.xiaowine.ui.widget.WineTitle
+import cn.xiaowine.ui.widget.WineCard
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,13 +24,13 @@ import kotlinx.coroutines.launch
 open class WinePage : Fragment() {
     private val pageViewModel: PageViewModel by lazy { ViewModelProvider(requireActivity())[PageViewModel::class.java] }
 
-    private val viewList = ArrayList<Pair<Class<out View>, View.() -> Unit>>()
+    private var viewList = ArrayList<Pair<Class<out View>, View.() -> Unit>>()
 
     private val rootView: LinearLayout by lazy {
         LinearLayout(context).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(dp2px(context, 28f), 0, dp2px(context, 28f), 0)
             setBackgroundColor(context.getColor(R.color.background_color))
+            setPadding(0, 0, 0, dp2px(context, 30f))
         }
     }
 
@@ -59,6 +57,7 @@ open class WinePage : Fragment() {
                         .newInstance(requireContext())
                     addView(view.apply {
                         it.second.invoke(this)
+                        if (this::class.java.name != WineCard::class.java.name) setPadding(dp2px(context, 28f), 0, dp2px(context, 28f), 0)
                         findViewById<TextView>(R.id.summary_view)?.let { summaryView ->
                             if (summaryView.text.isEmpty()) {
                                 summaryView.visibility = View.GONE
@@ -70,25 +69,9 @@ open class WinePage : Fragment() {
         }
     }
 
-    fun initPage(init: ArrayList<Pair<Class<out View>, View.() -> Unit>>.() -> Unit) {
+    fun initPage(init: PageBuild.() -> Unit) {
         Log.d("WinePage", "init")
-        viewList.init()
-    }
-
-    fun ArrayList<Pair<Class<out View>, View.() -> Unit>>.text(init: WineText.() -> Unit) {
-        this.add(Pair(WineText::class.java) { init.invoke(this as WineText) })
-    }
-
-    fun ArrayList<Pair<Class<out View>, View.() -> Unit>>.line(init: (WineLine.() -> Unit)? = null) {
-        this.add(Pair(WineLine::class.java) { init?.invoke(this as WineLine) })
-    }
-
-    fun ArrayList<Pair<Class<out View>, View.() -> Unit>>.switch(init: WineSwitch.() -> Unit) {
-        this.add(Pair(WineSwitch::class.java) { init.invoke(this as WineSwitch) })
-    }
-
-    fun ArrayList<Pair<Class<out View>, View.() -> Unit>>.title(init: WineTitle.() -> Unit) {
-        this.add(Pair(WineTitle::class.java) { init.invoke(this as WineTitle) })
+        viewList = PageBuild().apply(init).viewList
     }
 
     fun toPage(page: Class<out WinePage>) {

@@ -81,7 +81,7 @@ open class WineActivity : AppCompatActivity() {
     }
 
     private fun toPage(page: Class<out WinePage>, isExit: Boolean) {
-        val find = pageItems.find { it.page == page } ?: throw Exception("No page")
+        val find = pageItems.find { it.page == page } ?: error("No page")
         binding.apply {
             scrollView.scrollX = 0
             collapsingToolbarLayout.apply {
@@ -97,6 +97,6 @@ open class WineActivity : AppCompatActivity() {
                 }
             }
             .replace(R.id.page, page, null)
-            .commitNow()
+            .commitNowAllowingStateLoss()
     }
 }

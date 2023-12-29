@@ -18,6 +18,7 @@ class APage : WinePage() {
                 onClick {
                     toPage(BPage::class.java)
                 }
+
             }
             text {
                 title = "to CPage"
@@ -99,7 +100,20 @@ class APage : WinePage() {
                 }
                 setIcon(R.drawable.ic_launcher_background)
             }
-            line()
+//            line()
+            card {
+                build {
+                    title {
+                        text = "WineCardTitle"
+                    }
+                    link {
+                        title = "链接"
+                    }
+                    link {
+                        title = "链接"
+                    }
+                }
+            }
         }
     }
 }

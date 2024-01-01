@@ -9,4 +9,6 @@
     <color name="card_title_color">#9399b3</color>
     <color name="card_link_color">#0d84ff</color>
     <color name="card_bg_color">#EDEDED</color>
+    <color name="seekbar_bg_color">#e6e6e6</color>
+    <color name="seekbar_color">#0c84FF</color>
 </resources>

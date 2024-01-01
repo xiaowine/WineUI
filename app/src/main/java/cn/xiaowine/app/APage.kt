@@ -1,7 +1,10 @@
 package cn.xiaowine.app
 
+import android.util.Log
+import android.widget.SeekBar
 import android.widget.Toast
 import cn.xiaowine.ui.page.WinePage
+import cn.xiaowine.ui.widget.WineSeekBar
 
 class APage : WinePage() {
 
@@ -18,7 +21,6 @@ class APage : WinePage() {
                 onClick {
                     toPage(BPage::class.java)
                 }
-
             }
             text {
                 title = "to CPage"
@@ -100,7 +102,24 @@ class APage : WinePage() {
                 }
                 setIcon(R.drawable.ic_launcher_background)
             }
-//            line()
+            line()
+            title {
+                text = "SeekBar"
+            }
+            seekbar {
+                minProgress = -200
+                maxProgress = 250
+                onProgressChanged(object : WineSeekBar.ProgressChangedListener {
+                    override fun onChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                        Toast.makeText(context, "progress:$progress", Toast.LENGTH_SHORT).show()
+                    }
+                })
+                onLongClick { _, _ ->
+                    Toast.makeText(context, "onLongClick", Toast.LENGTH_SHORT).show()
+                }
+            }
+            line()
+
             card {
                 build {
                     title {
@@ -114,6 +133,7 @@ class APage : WinePage() {
                     }
                 }
             }
+
         }
     }
 }

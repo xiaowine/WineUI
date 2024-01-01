@@ -1,16 +1,19 @@
 package cn.xiaowine.ui.widget
 
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView
 import cn.xiaowine.ui.R
 import cn.xiaowine.ui.Tools.dp2px
 
 
-class WineCardLink(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : AppCompatTextView(context, attrs, defStyleAttr) {
+@SuppressLint("AppCompatCustomView")
+class WineCardLink(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : TextView(context, attrs, defStyleAttr) {
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context) : this(context, null)
 

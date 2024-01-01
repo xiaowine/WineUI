@@ -13,6 +13,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.content.ContextCompat
 import cn.xiaowine.ui.R
 import cn.xiaowine.ui.Tools.dp2px
 
@@ -77,9 +78,8 @@ class WineText(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Cons
         }
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
     fun setIcon(resId: Int) {
-        setIcon(context.getDrawable(resId))
+        setIcon(ContextCompat.getDrawable(context, resId))
     }
 
     fun setIcon(drawable: Drawable?) {

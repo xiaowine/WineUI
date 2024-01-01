@@ -7,4 +7,5 @@
     <color name="line_color">#2D2D2D</color>
     <color name="card_bg_color">#222224</color>
     <color name="card_title_color">@android:color/white</color>
+    <color name="seekbar_bg_color">#333333</color>
 </resources>

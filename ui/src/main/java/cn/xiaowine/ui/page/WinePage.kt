@@ -49,10 +49,15 @@ open class WinePage : Fragment() {
         it
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
     private fun addView2Root() {
         rootView.apply {
             CoroutineScope(Dispatchers.Main).launch {
                 viewList.forEach {
+                    if (!isAdded)return@launch
                     val view = it.first.getDeclaredConstructor(Context::class.java)
                         .newInstance(requireContext())
                     addView(view.apply {

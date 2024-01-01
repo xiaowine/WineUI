@@ -1,6 +1,5 @@
 package cn.xiaowine.ui.widget
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
@@ -13,6 +12,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.content.ContextCompat
 import cn.xiaowine.ui.R
 import cn.xiaowine.ui.Tools.dp2px
 import cn.xiaowine.ui.appcompat.HyperSwitch
@@ -82,9 +82,9 @@ class WineSwitch(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Co
         }
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
+
     fun setIcon(resId: Int) {
-        setIcon(context.getDrawable(resId))
+        setIcon(ContextCompat.getDrawable(context, resId))
     }
 
     fun setIcon(drawable: Drawable?) {

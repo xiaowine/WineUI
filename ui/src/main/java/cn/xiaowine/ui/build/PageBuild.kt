@@ -3,6 +3,7 @@ package cn.xiaowine.ui.build
 import android.view.View
 import cn.xiaowine.ui.widget.WineCard
 import cn.xiaowine.ui.widget.WineLine
+import cn.xiaowine.ui.widget.WineSeekBar
 import cn.xiaowine.ui.widget.WineSwitch
 import cn.xiaowine.ui.widget.WineText
 import cn.xiaowine.ui.widget.WineTitle
@@ -28,5 +29,8 @@ class PageBuild {
 
     fun card(init: WineCard.() -> Unit) {
         viewList.add(Pair(WineCard::class.java) { init.invoke(this as WineCard) })
+    }
+    fun seekbar(init: WineSeekBar.() -> Unit) {
+        viewList.add(Pair(WineSeekBar::class.java) { init.invoke(this as WineSeekBar) })
     }
 }

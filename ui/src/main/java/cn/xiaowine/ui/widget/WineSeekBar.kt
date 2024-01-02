@@ -7,14 +7,16 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.widget.LinearLayout
 import android.widget.SeekBar
-import android.widget.TextView
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.content.ContextCompat
 import cn.xiaowine.ui.R
 import cn.xiaowine.ui.Tools.dp2px
 import cn.xiaowine.ui.Tools.hideView
 import cn.xiaowine.ui.Tools.showView
 import cn.xiaowine.ui.appcompat.HyperSeekBar
+import kotlin.properties.Delegates
 
 
 class WineSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : ConstraintLayout(context, attrs, defStyleAttr) {
@@ -24,34 +26,23 @@ class WineSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : C
     private var onProgressChangedListener: ProgressChangedListener? = null
 
     val inflate: ConstraintLayout
-    var minProgress: Int
-        get() {
-            return minText.text.toString().toInt()
-        }
-        set(value) {
-            minText.text = value.toString()
-            seekBar.min = value
-        }
-    var maxProgress: Int
-        get() {
-            return maxText.text.toString().toInt()
-        }
-        set(value) {
-            maxText.text = value.toString()
-            seekBar.max = value
-        }
-    var nowProgress: Int
-        get() {
-            return nowText.text.toString().toInt()
-        }
-        set(value) {
-            nowText.text = value.toString()
-            seekBar.progress = value
-        }
 
-    private fun TextView.createTextView(stringRes: Int): TextView {
+    var minProgress by Delegates.observable(0) { _, _, newValue ->
+        minText.text = newValue.toString()
+        seekBar.min = newValue
+    }
+    var maxProgress by Delegates.observable(0) { _, _, newValue ->
+        maxText.text = newValue.toString()
+        seekBar.max = newValue
+    }
+    val nowProgress by Delegates.observable(0) { _, _, newValue ->
+        nowText.text = newValue.toString()
+        seekBar.progress = newValue
+    }
+
+    private fun AppCompatTextView.createTextView(stringRes: Int): AppCompatTextView {
         return this.apply {
-            text = context.getString(stringRes)
+            text = ContextCompat.getString(context, stringRes)
             if (layoutParams is LinearLayout.LayoutParams) {
                 setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
                 setPadding(dp2px(context, 20f), 0, dp2px(context, 20f), 0)
@@ -62,24 +53,24 @@ class WineSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : C
                 layoutParams.apply {
                     width = dp2px(context, 50f)
                 }
-            }
-            typeface = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                Typeface.create(Typeface.DEFAULT, 600, false)
-            } else {
-                Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
+                typeface = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    Typeface.create(Typeface.DEFAULT, 600, false)
+                } else {
+                    Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
+                }
             }
         }
     }
 
-    val minText: TextView
+    val minText: AppCompatTextView
         get() {
             return inflate.findViewById(R.id.minText)
         }
-    val maxText: TextView
+    val maxText: AppCompatTextView
         get() {
             return inflate.findViewById(R.id.maxText)
         }
-    val nowText: TextView
+    val nowText: AppCompatTextView
         get() {
             return inflate.findViewById(R.id.nowText)
         }

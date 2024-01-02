@@ -27,14 +27,14 @@
             android:layout_marginStart="24dp"
             app:layout_constraintEnd_toEndOf="parent">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:textColor="@color/title_text_color"
                 android:id="@+id/title_view" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="false"

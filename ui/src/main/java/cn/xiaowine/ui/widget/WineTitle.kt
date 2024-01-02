@@ -6,6 +6,7 @@ import android.os.Build
 import android.util.AttributeSet
 import android.util.TypedValue
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
 import cn.xiaowine.ui.R
 import cn.xiaowine.ui.Tools.dp2px
 
@@ -15,7 +16,7 @@ class WineTitle(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : App
 
     init {
         setPadding(0, dp2px(context, 9.75f), 0, dp2px(context, 9.75f))
-        setTextColor(context.getColor(R.color.title_color))
+        setTextColor(ContextCompat.getColor(context, R.color.title_color))
         setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             paint.typeface = Typeface.create(null, 400, false)

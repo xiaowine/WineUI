@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="background_color">@android:color/white</color>
-    <color  name="title_text_color">@android:color/black</color>
+    <color name="title_text_color">@android:color/black</color>
     <color name="switch_on_color">#0d84ff</color>
     <color name="color_track_color">#e6e6e6</color>
     <color name="line_color">#E6E6E6</color>
@@ -11,4 +11,14 @@
     <color name="card_bg_color">#EDEDED</color>
     <color name="seekbar_bg_color">#e6e6e6</color>
     <color name="seekbar_color">#0c84FF</color>
+    <color name="dialog_background_color">@android:color/white</color>
+    <color name="button_disable_text_color">@android:color/white</color>
+    <color name="button_default_color">#0c84FF</color>
+    <color name="button_disable_color">#C2D9FF</color>
+    <color name="button_pressed_color">#0d7AEC</color>
+    <color name="button_text_color">@android:color/white</color>
+    <color name="button_cancel_pressed_color">#E8E8E8</color>
+    <color name="button_cancel_disable_color">#F0F0F0</color>
+    <color name="button_cancel_color">#F0F0F0</color>
+    <color name="button_cancel_text_color">#303030</color>
 </resources>

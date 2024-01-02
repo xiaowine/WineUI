@@ -9,7 +9,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
@@ -22,11 +22,11 @@ class WineText(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Cons
     constructor(context: Context) : this(context, null)
 
     val inflate: ConstraintLayout
-    val titleView: TextView
+    val titleView: AppCompatTextView
         get() {
             return inflate.findViewById(R.id.title_view)
         }
-    val summaryView: TextView
+    val summaryView: AppCompatTextView
         get() {
             return inflate.findViewById(R.id.summary_view)
         }

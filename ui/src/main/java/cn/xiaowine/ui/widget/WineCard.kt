@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.LinearLayout
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import cn.xiaowine.ui.R
 import cn.xiaowine.ui.Tools.dp2px
 import cn.xiaowine.ui.build.CardViewBuild
@@ -18,7 +19,7 @@ class WineCard(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Card
         radius = 45f
         cardElevation = 0f
         useCompatPadding = false
-        setCardBackgroundColor(context.getColor(R.color.card_bg_color))
+        setCardBackgroundColor(ContextCompat.getColor(context, R.color.card_bg_color))
         layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT).apply {
             setMargins(dp2px(context, 15f), 0, dp2px(context, 15f), 0)
         }

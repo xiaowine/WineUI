@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.widget.FrameLayout
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
 import cn.xiaowine.ui.R
 import cn.xiaowine.ui.Tools.dp2px
 
@@ -17,6 +18,7 @@ class WineCardTitle(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
             setMargins(0, dp2px(context, 10f), 0, dp2px(context, 10f))
         }
         setTextColor(context.getColor(R.color.card_title_color))
+        setTextColor(ContextCompat.getColor(context, R.color.card_title_color))
         setTextSize(TypedValue.COMPLEX_UNIT_SP, 18.6f)
     }
 }

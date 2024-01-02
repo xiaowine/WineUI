@@ -1,6 +1,9 @@
 package cn.xiaowine.ui
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.drawable.ShapeDrawable
+import android.graphics.drawable.shapes.RoundRectShape
 import android.util.TypedValue
 import android.view.View
 import android.view.animation.AlphaAnimation
@@ -48,4 +51,16 @@ object Tools {
         }
         startAnimation(alphaAnimation)
     }
+
+    fun createRoundShape(radius: Float, color: Int): ShapeDrawable {
+        val radii = floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius)
+        val roundRectShape = RoundRectShape(radii, null, null)
+        return ShapeDrawable(roundRectShape).apply {
+            paint.color = color
+        }
+    }
+
+    @SuppressLint("PrivateApi")
+    @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+    fun getProp(mKey: String): String = Class.forName("android.os.SystemProperties").getMethod("get", String::class.java).invoke(Class.forName("android.os.SystemProperties"), mKey).toString()
 }

@@ -1,11 +1,8 @@
 package cn.xiaowine.ui
 
 import android.content.Context
-import android.text.TextUtils
 import android.util.TypedValue
-import android.view.Display
 import android.view.View
-import android.view.WindowManager
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.AnimationSet

@@ -1,7 +1,6 @@
 package cn.xiaowine.ui.widget
 
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable

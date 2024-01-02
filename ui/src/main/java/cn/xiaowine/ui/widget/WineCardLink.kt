@@ -7,7 +7,6 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.widget.FrameLayout
 import android.widget.TextView
-import androidx.appcompat.widget.AppCompatTextView
 import cn.xiaowine.ui.R
 import cn.xiaowine.ui.Tools.dp2px
 

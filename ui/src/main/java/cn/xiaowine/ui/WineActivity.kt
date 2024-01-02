@@ -3,6 +3,8 @@ package cn.xiaowine.ui
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
+import android.view.Gravity
+import android.view.MenuItem
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -15,7 +17,7 @@ import cn.xiaowine.ui.viewmodel.PageViewModel
 
 
 open class WineActivity : AppCompatActivity() {
-    val pageViewModel: PageViewModel by lazy { ViewModelProvider(this)[PageViewModel::class.java] }
+    private val pageViewModel: PageViewModel by lazy { ViewModelProvider(this)[PageViewModel::class.java] }
 
     val pageItems: MutableList<PageData> = mutableListOf()
 
@@ -27,6 +29,7 @@ open class WineActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityWineBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
         binding.collapsingToolbarLayout.apply {
             expandedTitleTextSize = dp2px(context, 30f).toFloat()
             collapsedTitleTextSize = dp2px(context, 20f).toFloat()
@@ -52,10 +55,10 @@ open class WineActivity : AppCompatActivity() {
                     finish()
                     return@observe
                 }
-                toPage(pageQueue.last(),true)
+                toPage(pageQueue.last(), true)
             } else {
                 pageQueue.add(it.now)
-                toPage(it.now,false)
+                toPage(it.now, false)
             }
 
         }
@@ -65,11 +68,16 @@ open class WineActivity : AppCompatActivity() {
                     finish()
                     return
                 }
-                toPage(pageQueue[pageQueue.lastIndex - 1],true)
+                toPage(pageQueue[pageQueue.lastIndex - 1], true)
                 pageQueue.remove(pageQueue.last())
             }
         }
         onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return super.onOptionsItemSelected(item)
     }
 
     fun registerPage(vararg page: PageData) {
@@ -85,7 +93,12 @@ open class WineActivity : AppCompatActivity() {
         binding.apply {
             scrollView.scrollX = 0
             collapsingToolbarLayout.apply {
+                collapsedTitleGravity = if (find.isHome) Gravity.CENTER else Gravity.START
                 title = find.title ?: getString(find.titleRes)
+            }
+            supportActionBar?.apply {
+                setDisplayHomeAsUpEnabled(!find.isHome)
+                setHomeButtonEnabled(!find.isHome)
             }
         }
         supportFragmentManager

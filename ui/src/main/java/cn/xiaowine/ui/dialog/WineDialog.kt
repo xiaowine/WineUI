@@ -97,7 +97,7 @@ class WineDialog(context: Context) : Dialog(context, R.style.Theme_WineDialog) {
         _binding = null
     }
 
-    fun addButton(string: String, event: (() -> Unit)? = null): HyperButton {
+    fun addButton(string: String, event: ((HyperButton) -> Unit)? = null): HyperButton {
         return HyperButton(context).apply {
             (layoutParams as LinearLayout.LayoutParams).apply {
                 setMargins(dp2px(context, 6f), dp2px(context, 10f), dp2px(context, 6f), dp2px(context, 6f))
@@ -107,7 +107,7 @@ class WineDialog(context: Context) : Dialog(context, R.style.Theme_WineDialog) {
             setOnClickListener {
                 if (!it.isEnabled) return@setOnClickListener
                 if (event != null) {
-                    event()
+                    event(this)
                 } else {
                     dismiss()
                 }

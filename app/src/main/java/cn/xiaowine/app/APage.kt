@@ -1,8 +1,8 @@
 package cn.xiaowine.app
 
-import android.util.Log
 import android.widget.SeekBar
 import android.widget.Toast
+import cn.xiaowine.ui.dialog.WineDialog
 import cn.xiaowine.ui.page.WinePage
 import cn.xiaowine.ui.widget.WineSeekBar
 
@@ -116,6 +116,67 @@ class APage : WinePage() {
                 })
                 onLongClick { _, _ ->
                     Toast.makeText(context, "onLongClick", Toast.LENGTH_SHORT).show()
+                }
+            }
+            line()
+
+            text {
+                title = "Show Dialog"
+                onClick {
+                    WineDialog(context).apply {
+                        setTitle("标题")
+                        setMessage("这是一个消息")
+                        addButton("确定") {
+                            Toast.makeText(context, "确定", Toast.LENGTH_SHORT).show()
+                            dismiss()
+                        }
+                        addButton("取消") {
+                            Toast.makeText(context, "取消", Toast.LENGTH_SHORT).show()
+                            dismiss()
+                        }.setCancel(true)
+                        show()
+                    }
+                }
+            }
+            text {
+                title = "Show Dialog"
+                onClick {
+                    WineDialog(context).apply {
+                        setTitle("标题")
+                        setMessage("这是一个消息")
+                        addButton("确定") {
+                            Toast.makeText(context, "确定", Toast.LENGTH_SHORT).show()
+                            dismiss()
+                        }
+                        addButton("取消") {
+                            Toast.makeText(context, "取消", Toast.LENGTH_SHORT).show()
+                            dismiss()
+                        }.isEnabled = false
+                        show()
+                    }
+                }
+            }
+            text {
+                title = "Show Dialog"
+                onClick {
+                    WineDialog(context).apply {
+                        setTitle("标题")
+                        setMessage("这是一个消息")
+                        addButton("确定") {
+                            Toast.makeText(context, "确定", Toast.LENGTH_SHORT).show()
+                            dismiss()
+
+                        }
+                        addButton("1取消") {
+                            Toast.makeText(context, "1取消", Toast.LENGTH_SHORT).show()
+                            dismiss()
+                        }
+                        addButton("2取消") {
+                            Toast.makeText(context, "2取消", Toast.LENGTH_SHORT).show()
+                            dismiss()
+                        }
+                        show()
+                    }
                 }
             }
             line()

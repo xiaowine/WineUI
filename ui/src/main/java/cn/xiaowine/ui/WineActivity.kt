@@ -5,10 +5,12 @@ import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import android.view.MenuItem
+import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import cn.xiaowine.ui.Tools.dp2px
+import cn.xiaowine.ui.Tools.showView
 import cn.xiaowine.ui.data.PageData
 import cn.xiaowine.ui.data.TogglePageDate
 import cn.xiaowine.ui.databinding.ActivityWineBinding
@@ -101,6 +103,10 @@ open class WineActivity : AppCompatActivity() {
                 setDisplayHomeAsUpEnabled(!find.isHome)
                 setHomeButtonEnabled(!find.isHome)
             }
+        }
+        binding.appBar.apply {
+            visibility = View.GONE
+            showView(400)
         }
         supportFragmentManager
             .beginTransaction().apply {

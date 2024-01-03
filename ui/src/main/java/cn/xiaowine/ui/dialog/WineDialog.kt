@@ -19,21 +19,27 @@ import cn.xiaowine.ui.Tools.createRoundShape
 import cn.xiaowine.ui.Tools.dp2px
 import cn.xiaowine.ui.Tools.getProp
 import cn.xiaowine.ui.appcompat.HyperButton
+import cn.xiaowine.ui.databinding.WineDialogBinding
 
 class WineDialog(context: Context) : Dialog(context, R.style.Theme_WineDialog) {
+    private var _binding: WineDialogBinding? = null
+    private val binding: WineDialogBinding get() = _binding!!
     val titleView: AppCompatTextView
-        get() = findViewById(R.id.title_view)
+        get() = binding.titleView
     val messageView: AppCompatTextView
-        get() = findViewById(R.id.message_view)
+        get() = binding.messageView
     val customizAreaeView: LinearLayout
-        get() = findViewById(R.id.customize_area_view)
+        get() = binding.customizeAreaView
     val buttonAreaView: LinearLayout
-        get() = findViewById(R.id.button_area_view)
+        get() = binding.buttonAreaView
     val constraintLayout: ConstraintLayout
-        get() = findViewById(R.id.constraintLayout)
+        get() = binding.constraintLayout
 
     init {
-        setContentView(R.layout.wine_dialog)
+        _binding = WineDialogBinding.inflate(layoutInflater).apply {
+            setContentView(root)
+        }
+//        setContentView(R.layout.wine_dialog)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,16 +47,16 @@ class WineDialog(context: Context) : Dialog(context, R.style.Theme_WineDialog) {
         ConstraintSet().apply {
             clone(constraintLayout)
             val dp20toPx = dp2px(context, 20f)
-            connect(R.id.title_view, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, dp20toPx)
-            connect(R.id.title_view, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, dp20toPx)
-            connect(R.id.title_view, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, dp20toPx)
-            connect(R.id.message_view, ConstraintSet.TOP, R.id.title_view, ConstraintSet.BOTTOM, dp2px(context, 12f))
-            connect(R.id.message_view, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, dp20toPx)
-            connect(R.id.message_view, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, dp20toPx)
-            connect(R.id.button_area_view, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, dp20toPx)
-            connect(R.id.button_area_view, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, dp20toPx)
-            connect(R.id.button_area_view, ConstraintSet.TOP, R.id.customize_area_view, ConstraintSet.TOP, dp2px(context, 14f))
-            connect(R.id.button_area_view, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, dp20toPx)
+            connect(titleView.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, dp20toPx)
+            connect(titleView.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, dp20toPx)
+            connect(titleView.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, dp20toPx)
+            connect(messageView.id, ConstraintSet.TOP, titleView.id, ConstraintSet.BOTTOM, dp2px(context, 12f))
+            connect(messageView.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, dp20toPx)
+            connect(messageView.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, dp20toPx)
+            connect(buttonAreaView.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, dp20toPx)
+            connect(buttonAreaView.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, dp20toPx)
+            connect(buttonAreaView.id, ConstraintSet.TOP, R.id.customize_area_view, ConstraintSet.TOP, dp2px(context, 14f))
+            connect(buttonAreaView.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, dp20toPx)
             applyTo(constraintLayout)
         }
         titleView.apply {
@@ -84,6 +90,11 @@ class WineDialog(context: Context) : Dialog(context, R.style.Theme_WineDialog) {
         } else {
             buttonAreaView.orientation = LinearLayout.HORIZONTAL
         }
+    }
+
+    override fun dismiss() {
+        super.dismiss()
+        _binding = null
     }
 
     fun addButton(string: String, event: (() -> Unit)? = null): HyperButton {

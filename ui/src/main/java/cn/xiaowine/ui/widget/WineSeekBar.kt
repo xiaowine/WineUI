@@ -5,6 +5,8 @@ import android.graphics.Typeface
 import android.os.Build
 import android.util.AttributeSet
 import android.util.TypedValue
+import android.view.LayoutInflater
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.SeekBar
 import androidx.appcompat.widget.AppCompatTextView
@@ -16,6 +18,7 @@ import cn.xiaowine.ui.Tools.dp2px
 import cn.xiaowine.ui.Tools.hideView
 import cn.xiaowine.ui.Tools.showView
 import cn.xiaowine.ui.appcompat.HyperSeekBar
+import cn.xiaowine.ui.databinding.WineSeekBinding
 import kotlin.properties.Delegates
 
 
@@ -24,8 +27,8 @@ class WineSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : C
     constructor(context: Context) : this(context, null)
 
     private var onProgressChangedListener: ProgressChangedListener? = null
-
-    val inflate: ConstraintLayout
+    private var _binding: WineSeekBinding? = null
+    private val binding: WineSeekBinding get() = _binding!!
 
     var minProgress by Delegates.observable(0) { _, _, newValue ->
         minText.text = newValue.toString()
@@ -62,34 +65,21 @@ class WineSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : C
         }
     }
 
-    val minText: AppCompatTextView
-        get() {
-            return inflate.findViewById(R.id.minText)
-        }
-    val maxText: AppCompatTextView
-        get() {
-            return inflate.findViewById(R.id.maxText)
-        }
-    val nowText: AppCompatTextView
-        get() {
-            return inflate.findViewById(R.id.nowText)
-        }
-    val seekBar: HyperSeekBar
-        get() {
-            return inflate.findViewById(R.id.seekBar)
-        }
-    val textLayout: LinearLayout
-        get() {
-            return inflate.findViewById(R.id.textLayout)
-        }
+    val minText: AppCompatTextView get() = binding.minText
+    val maxText: AppCompatTextView get() = binding.maxText
+    val nowText: AppCompatTextView get() = binding.nowText
+    val seekBar: HyperSeekBar get() = binding.seekBar
+    val textLayout: LinearLayout get() = binding.textLayout
+    private val constraintLayout: ConstraintLayout get() = binding.constraintLayout
+    private val fragment: FrameLayout get() = binding.fragment
+
 
     init {
-        inflate = inflate(context, R.layout.wine_seek, this) as ConstraintLayout
-        val constraintLayout = inflate.findViewById<ConstraintLayout>(R.id.constraintLayout)
+        _binding = WineSeekBinding.inflate(LayoutInflater.from(context), this, true)
         ConstraintSet().apply {
             clone(constraintLayout)
-            connect(R.id.fragment, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, dp2px(context, 15f))
-            connect(R.id.fragment, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, dp2px(context, 15f))
+            connect(fragment.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, dp2px(context, 15f))
+            connect(fragment.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, dp2px(context, 15f))
             applyTo(constraintLayout)
         }
         minText.createTextView(R.string.WineSeekBar_MinProgress)
@@ -120,15 +110,11 @@ class WineSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : C
     }
 
     fun onLongClick(onLongClick: ((seekBar: SeekBar, progress: Int) -> Unit)? = null) {
-        if (onLongClick == null) {
-            seekBar.setOnLongClickListener(null)
-        } else {
-            seekBar.setLongClickListener(object : HyperSeekBar.LongClickListener {
-                override fun onLongClick(seekBar: SeekBar, progress: Int) {
-                    onLongClick.invoke(seekBar, progress)
-                }
-            })
-        }
+        seekBar.setLongClickListener(object : HyperSeekBar.LongClickListener {
+            override fun onLongClick(seekBar: SeekBar, progress: Int) {
+                onLongClick?.invoke(seekBar, progress)
+            }
+        })
     }
 
     interface ProgressChangedListener {

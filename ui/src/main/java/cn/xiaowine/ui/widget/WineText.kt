@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.AttributeSet
 import android.util.TypedValue
+import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatTextView
@@ -14,6 +15,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import cn.xiaowine.ui.R
+import cn.xiaowine.ui.databinding.WineTextBinding
 import cn.xiaowine.ui.Tools.dp2px
 
 
@@ -21,23 +23,18 @@ class WineText(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Cons
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context) : this(context, null)
 
-    val inflate: ConstraintLayout
-    val titleView: AppCompatTextView
-        get() {
-            return inflate.findViewById(R.id.title_view)
-        }
-    val summaryView: AppCompatTextView
-        get() {
-            return inflate.findViewById(R.id.summary_view)
-        }
-    val arrowImage: ImageView
-        get() {
-            return inflate.findViewById(R.id.arrow_image)
-        }
-    val iconView: ImageView
-        get() {
-            return inflate.findViewById(R.id.imageView)
-        }
+    private var _binding: WineTextBinding? = null
+    private val binding: WineTextBinding get() = _binding!!
+
+
+    val titleView: AppCompatTextView get() = binding.titleView
+    val summaryView: AppCompatTextView get() = binding.summaryView
+    val arrowImage: ImageView get() = binding.arrowImage
+    val iconView: ImageView get() = binding.imageView
+
+
+    private val constraintLayout: ConstraintLayout get() = binding.constraintLayout
+    private val linearLayout: LinearLayout get() = binding.linearLayout
     var title: String
         get() {
             return titleView.text.toString()
@@ -55,25 +52,16 @@ class WineText(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Cons
 
 
     fun onClick(onClick: (() -> Unit)? = null) {
-        if (onClick == null) {
-            inflate.setOnClickListener(null)
-            haveArrow(false)
-        } else {
-            haveArrow(true)
-            inflate.setOnClickListener {
-                onClick.invoke()
-            }
+        haveArrow(onClick != null)
+        binding.root.setOnClickListener {
+            onClick?.invoke()
         }
     }
 
     fun onLongClick(onLongClick: (() -> Unit)? = null) {
-        if (onLongClick == null) {
-            inflate.setOnLongClickListener(null)
-        } else {
-            inflate.setOnLongClickListener {
-                onLongClick.invoke()
-                true
-            }
+        binding.root.setOnLongClickListener {
+            onLongClick?.invoke()
+            true
         }
     }
 
@@ -82,17 +70,14 @@ class WineText(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Cons
     }
 
     fun setIcon(drawable: Drawable?) {
-        if (drawable == null) {
-            iconView.visibility = GONE
-        } else {
-            val constraintLayout = inflate.findViewById<ConstraintLayout>(R.id.constraintLayout)
+        if (drawable != null) {
             ConstraintSet().apply {
                 clone(constraintLayout)
-                connect(R.id.linearLayout, ConstraintSet.START, R.id.imageView, ConstraintSet.END, dp2px(context, 60f))
+                connect(linearLayout.id, ConstraintSet.START, iconView.id, ConstraintSet.END, dp2px(context, 60f))
                 applyTo(constraintLayout)
             }
-            iconView.visibility = VISIBLE
         }
+        iconView.visibility = if (drawable == null) GONE else VISIBLE
         iconView.setImageDrawable(drawable)
     }
 
@@ -101,7 +86,7 @@ class WineText(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Cons
     }
 
     init {
-        inflate = inflate(context, R.layout.wine_text, this) as ConstraintLayout
+        _binding = WineTextBinding.inflate(LayoutInflater.from(context), this, true)
         titleView.apply {
             setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
@@ -119,18 +104,14 @@ class WineText(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Cons
         arrowImage.apply {
             setImageResource(R.drawable.ic_right_arrow)
         }
-        findViewById<LinearLayout>(R.id.linearLayout).apply {
-            setPadding(0, dp2px(context, 20f), 0, dp2px(context, 20f))
-        }
-        val constraintLayout = inflate.findViewById<ConstraintLayout>(R.id.constraintLayout)
+        linearLayout.setPadding(0, dp2px(context, 20f), 0, dp2px(context, 20f))
         ConstraintSet().apply {
             clone(constraintLayout)
-//            connect(R.id.linearLayout, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0)
-            connect(R.id.linearLayout, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, dp2px(context, 20f))
-            connect(R.id.arrow_image, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0)
-            connect(R.id.imageView, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
-            connect(R.id.imageView, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
-            connect(R.id.linearLayout, ConstraintSet.START, R.id.imageView, ConstraintSet.END, 0)
+            connect(linearLayout.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, dp2px(context, 20f))
+            connect(arrowImage.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0)
+            connect(iconView.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
+            connect(iconView.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
+            connect(linearLayout.id, ConstraintSet.START, iconView.id, ConstraintSet.END, 0)
             applyTo(constraintLayout)
         }
     }

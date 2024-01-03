@@ -23,11 +23,12 @@ open class WineActivity : AppCompatActivity() {
 
     val pageQueue: MutableList<Class<out WinePage>> = mutableListOf()
 
-    private lateinit var binding: ActivityWineBinding
+    private var _binding: ActivityWineBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityWineBinding.inflate(layoutInflater)
+        _binding = ActivityWineBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         binding.collapsingToolbarLayout.apply {
@@ -111,5 +112,10 @@ open class WineActivity : AppCompatActivity() {
             }
             .replace(R.id.page, page, null)
             .commitNowAllowingStateLoss()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

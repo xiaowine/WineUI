@@ -50,6 +50,7 @@ open class WinePage : Fragment() {
     }
 
     override fun onDestroy() {
+        Log.e("WinePage", "onDestroy")
         super.onDestroy()
     }
 
@@ -75,7 +76,6 @@ open class WinePage : Fragment() {
     }
 
     fun initPage(init: PageBuild.() -> Unit) {
-        Log.d("WinePage", "init")
         viewList = PageBuild().apply(init).viewList
     }
 

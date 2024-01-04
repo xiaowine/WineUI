@@ -4,11 +4,8 @@ import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
-import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -31,8 +28,11 @@ open class WineActivity : AppCompatActivity() {
     private var _binding: ActivityWineBinding? = null
     private val binding get() = _binding!!
 
+    private var savedState: Bundle? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        savedState = savedInstanceState
         _binding = ActivityWineBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
@@ -68,6 +68,15 @@ open class WineActivity : AppCompatActivity() {
             }
 
         }
+        setupOnBackPressedCallback()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun setupOnBackPressedCallback() {
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if (pageQueue.size == 1) {
@@ -81,17 +90,12 @@ open class WineActivity : AppCompatActivity() {
         onBackPressedDispatcher.addCallback(this, callback)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        onBackPressedDispatcher.onBackPressed()
-        return super.onOptionsItemSelected(item)
-    }
-
     fun registerPage(vararg page: PageData) {
-        page.forEach {
-            pageItems.add(it)
+        pageItems.addAll(page)
+        if (pageViewModel.nowPage.value == null) {
+            val home = pageItems.singleOrNull { it.isHome } ?: throw Exception("No home page")
+            pageViewModel.nowPage.postValue(TogglePageDate(home.page, null))
         }
-        val home = pageItems.singleOrNull { it.isHome } ?: throw Exception("No home page")
-        pageViewModel.nowPage.postValue(TogglePageDate(home.page, null))
     }
 
     private fun toPage(page: Class<out WinePage>, isExit: Boolean) {
@@ -111,6 +115,10 @@ open class WineActivity : AppCompatActivity() {
             visibility = View.GONE
             showView(400)
         }
+        performFragmentTransaction(page, isExit)
+    }
+
+    private fun performFragmentTransaction(page: Class<out WinePage>, isExit: Boolean) {
         supportFragmentManager
             .beginTransaction().apply {
                 if (isExit) {
@@ -120,7 +128,7 @@ open class WineActivity : AppCompatActivity() {
                 }
             }
             .replace(R.id.page, page, null)
-            .commitNowAllowingStateLoss()
+            .commitNow()
     }
 
     override fun onDestroy() {

@@ -71,9 +71,11 @@ class WineDialog(context: Context) : Dialog(context, R.style.Theme_WineDialog) {
         window?.apply {
             if (getProp("ro.build.characteristics") == "tablet" || context.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 setGravity(Gravity.CENTER)
+                setWindowAnimations(R.style.Theme_WineDialogPadAnim)
             } else {
                 setGravity(Gravity.BOTTOM)
                 attributes.y = dp2px(context, 15f)
+                setWindowAnimations(R.style.Theme_WineDialogAnim)
             }
             setBackgroundDrawable(createRoundShape(dp2px(context, 30f).toFloat(), ContextCompat.getColor(context, R.color.dialog_background_color)))
             attributes.apply {
@@ -81,6 +83,7 @@ class WineDialog(context: Context) : Dialog(context, R.style.Theme_WineDialog) {
                 width = dp2px(context, 380f)
             }
         }
+
     }
 
     override fun show() {

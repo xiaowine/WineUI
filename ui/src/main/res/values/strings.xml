@@ -1,5 +1,2 @@
 <resources>
-    <string name="WineSeekBar_MinProgress">0</string>
-    <string name="WineSeekBar_NowProgress">50</string>
-    <string name="WineSeekBar_MaxProgress">100</string>
 </resources>

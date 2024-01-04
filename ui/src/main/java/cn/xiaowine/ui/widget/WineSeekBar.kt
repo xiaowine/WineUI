@@ -43,9 +43,9 @@ class WineSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : C
         seekBar.progress = newValue
     }
 
-    private fun AppCompatTextView.createTextView(stringRes: Int): AppCompatTextView {
+    private fun AppCompatTextView.createTextView(text: Int): AppCompatTextView {
         return this.apply {
-            text = ContextCompat.getString(context, stringRes)
+            this.text = text.toString()
             if (layoutParams is LinearLayout.LayoutParams) {
                 setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
                 setPadding(dp2px(context, 20f), 0, dp2px(context, 20f), 0)
@@ -82,9 +82,9 @@ class WineSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : C
             connect(fragment.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, dp2px(context, 15f))
             applyTo(constraintLayout)
         }
-        minText.createTextView(R.string.WineSeekBar_MinProgress)
-        maxText.createTextView(R.string.WineSeekBar_MaxProgress)
-        nowText.createTextView(R.string.WineSeekBar_NowProgress)
+        minText.createTextView(minProgress)
+        maxText.createTextView(maxProgress)
+        nowText.createTextView(nowProgress)
         seekBar.apply {
             setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {

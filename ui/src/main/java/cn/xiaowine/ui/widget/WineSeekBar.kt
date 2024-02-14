@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Typeface
 import android.os.Build
 import android.util.AttributeSet
-import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.widget.FrameLayout
@@ -13,9 +12,9 @@ import android.widget.SeekBar
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
-import cn.xiaowine.ui.Tools.dp2px
-import cn.xiaowine.ui.Tools.hideView
-import cn.xiaowine.ui.Tools.showView
+import cn.xiaowine.ui.tools.Tools.dp2px
+import cn.xiaowine.ui.tools.Tools.hideView
+import cn.xiaowine.ui.tools.Tools.showView
 import cn.xiaowine.ui.appcompat.HyperSeekBar
 import cn.xiaowine.ui.databinding.WineSeekBinding
 import kotlin.properties.Delegates

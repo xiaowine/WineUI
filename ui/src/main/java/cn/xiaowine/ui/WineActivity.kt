@@ -7,12 +7,13 @@ import androidx.lifecycle.ViewModelProvider
 import cn.xiaowine.ui.data.PageData
 import cn.xiaowine.ui.data.TogglePageDate
 import cn.xiaowine.ui.databinding.ActivityWineBinding
+import cn.xiaowine.ui.tools.ClassScanner.scanPages
 import cn.xiaowine.ui.viewmodel.PageViewModel
 
 
 open class WineActivity : AppCompatActivity() {
     private val pageViewModel: PageViewModel by lazy { ViewModelProvider(this)[PageViewModel::class.java] }
-    var pageItems: MutableList<PageData>
+    private var pageItems: MutableSet<PageData>
         get() = pageViewModel.pageItems.value!!
         set(value) {
             pageViewModel.pageItems.postValue(value)
@@ -43,6 +44,9 @@ open class WineActivity : AppCompatActivity() {
                 }
                 performFragmentTransaction(pageQueue.last(), true)
             } else {
+                if (pageItems.none { item -> item.page == it.now }) {
+                    error("Page not found")
+                }
                 if (!isHeavyLoad) {
                     pageQueue.add(it.now)
                 }
@@ -67,14 +71,32 @@ open class WineActivity : AppCompatActivity() {
         onBackPressedDispatcher.addCallback(this, callback)
     }
 
-    fun registerPage(vararg page: PageData) {
-        pageItems.addAll(page)
+    fun registerPage(vararg allPageData: PageData) {
+        pageItems.removeIf { pageItem ->
+            allPageData.any { it.page == pageItem.page }
+        }
+        pageItems.addAll(allPageData)
         if (pageViewModel.nowPage.value == null) {
-            val home = pageItems.singleOrNull { it.isHome } ?: throw Exception("No home page")
+            val home = pageItems.singleOrNull { it.isHome } ?: error("No home page")
             pageViewModel.nowPage.postValue(TogglePageDate(home.page, null))
         }
     }
 
+    @Suppress("UNCHECKED_CAST")
+    fun registerPage(packages: String, homePage: Class<out WinePage>) {
+        val scanPages = scanPages(this, packages)
+        pageItems.removeIf { pageItem ->
+           scanPages.any { it == pageItem.page }
+        }
+        scanPages.forEach {
+            if (it == homePage) {
+                return@forEach
+            }
+            pageItems.add(PageData(it as Class<out WinePage>))
+        }
+
+        pageItems.add(PageData(homePage, isHome = true))
+    }
 
     private fun performFragmentTransaction(page: Class<out WinePage>, isExit: Boolean) {
         supportFragmentManager

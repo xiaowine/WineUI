@@ -1,24 +1,21 @@
 package cn.xiaowine.ui.appcompat
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.StateListDrawable
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
-import android.view.View
-import android.widget.Button
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import cn.xiaowine.ui.R
-import cn.xiaowine.ui.Tools.createRoundShape
-import cn.xiaowine.ui.Tools.dp2px
+import cn.xiaowine.ui.tools.Tools.createRoundShape
+import cn.xiaowine.ui.tools.Tools.dp2px
 
 
 class HyperButton(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : AppCompatButton(context, attrs, defStyleAttr) {
-    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, androidx.appcompat.R.attr.buttonStyle)
     constructor(context: Context) : this(context, null)
 
     private var isCancel: Boolean = false

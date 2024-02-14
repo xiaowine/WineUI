@@ -5,10 +5,13 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.SwitchCompat
 import cn.xiaowine.ui.R
-import cn.xiaowine.ui.Tools.dp2px
+import cn.xiaowine.ui.tools.Tools.dp2px
 import java.lang.reflect.Field
 
-class HyperSwitch(context: Context, attrs: AttributeSet, defStyleAttr: Int) : SwitchCompat(context, attrs, defStyleAttr) {
+class HyperSwitch(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : SwitchCompat(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs,  androidx.appcompat.R.attr.switchStyle)
+    constructor(context: Context) : this(context, null)
+
 
     init {
         background = null

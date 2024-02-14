@@ -2,6 +2,8 @@ package cn.xiaowine.ui.build
 
 import android.view.View
 import cn.xiaowine.ui.WinePage
+import cn.xiaowine.ui.appcompat.HyperButton
+import cn.xiaowine.ui.appcompat.HyperEditText
 import cn.xiaowine.ui.widget.WineCard
 import cn.xiaowine.ui.widget.WineLine
 import cn.xiaowine.ui.widget.WineSeekBar
@@ -55,6 +57,13 @@ class PageBuild {
         viewList.add(Pair(WineSeekBar::class.java) { init.invoke(this as WineSeekBar) })
     }
 
+    fun button(init: HyperButton.() -> Unit) {
+        viewList.add(Pair(HyperButton::class.java) { init.invoke(this as HyperButton) })
+    }
+
+    fun edittext(init: HyperEditText.() -> Unit) {
+        viewList.add(Pair(HyperEditText::class.java) { init.invoke(this as HyperEditText) })
+    }
     //
 //    fun <T : View> custom(view: View, init: T.() -> Unit) {
 //        viewList.add(Pair(view::class.java) { init.invoke(this as T) })

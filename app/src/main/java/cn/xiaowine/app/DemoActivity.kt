@@ -1,7 +1,13 @@
 package cn.xiaowine.app
 
 import android.os.Bundle
+import android.util.Log
+import cn.xiaowine.app.pages.ButtonPage
+import cn.xiaowine.app.pages.CardPage
+import cn.xiaowine.app.pages.CustomPage
+import cn.xiaowine.app.pages.DialogPage
 import cn.xiaowine.app.pages.MainPage
+import cn.xiaowine.app.pages.SeeKBarPage
 import cn.xiaowine.app.pages.SwitchPage
 import cn.xiaowine.app.pages.TextPage
 import cn.xiaowine.ui.WineActivity
@@ -17,7 +23,14 @@ class DemoActivity : WineActivity() {
         registerPage(
             PageData(MainPage::class.java, isHome = true),
             PageData(TextPage::class.java),
-            PageData(SwitchPage::class.java)
+            PageData(SwitchPage::class.java),
+            PageData(ButtonPage::class.java),
+            PageData(CardPage::class.java),
+            PageData(CustomPage::class.java),
+            PageData(DialogPage::class.java),
+            PageData(SeeKBarPage::class.java),
         )
+//        或通过扫描包名注册页面（全部按照默认配置生成界面），两种方式可以混用，后注册的覆盖先注册的
+        registerPage("cn.xiaowine.app.pages", MainPage::class.java)
     }
 }

@@ -11,9 +11,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import cn.xiaowine.ui.Tools.dp2px
+import cn.xiaowine.ui.tools.Tools.dp2px
 import cn.xiaowine.ui.annotation.Coroutine
 import cn.xiaowine.ui.build.PageBuild
+import cn.xiaowine.ui.data.PageData
 import cn.xiaowine.ui.data.TogglePageDate
 import cn.xiaowine.ui.databinding.FragmentPageBinding
 import cn.xiaowine.ui.viewmodel.PageViewModel
@@ -29,6 +30,17 @@ open class WinePage : Fragment() {
 
     private var _binding: FragmentPageBinding? = null
     private val binding get() = _binding!!
+    var pageItems: MutableSet<PageData>
+        get() = pageViewModel.pageItems.value!!
+        set(value) {
+            pageViewModel.pageItems.postValue(value)
+        }
+
+    var pageQueue: MutableList<Class<out WinePage>>
+        get() = pageViewModel.pageQueue.value!!
+        set(value) {
+            pageViewModel.pageQueue.postValue(value)
+        }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentPageBinding.inflate(inflater, container, false)
@@ -37,6 +49,10 @@ open class WinePage : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        init()
+    }
+
+    fun init() {
         if (this::class.java.getAnnotation(Coroutine::class.java) != null) {
             CoroutineScope(Dispatchers.Main).launch {
                 addView2Root()
@@ -90,14 +106,14 @@ open class WinePage : Fragment() {
                     }
                 )
             }
-            val wineActivity = activity as WineActivity
-            val find = wineActivity.pageItems.find { it.page == wineActivity.pageQueue.last() } ?: return
+
+            val findPage = pageItems.find { it.page == pageQueue.last() } ?: return
             binding.apply {
                 collapsingToolbarLayout.apply {
-                    collapsedTitleGravity = if (find.isHome) Gravity.CENTER else Gravity.START
-                    title = find.title ?: getString(find.titleRes)
+                    collapsedTitleGravity = if (findPage.isHome) Gravity.CENTER else Gravity.START
+                    title = findPage.title ?: getString(findPage.titleRes)
                 }
-                if (!find.isHome) {
+                if (!findPage.isHome) {
                     toolbar.apply {
                         setNavigationIcon(androidx.appcompat.R.drawable.abc_ic_ab_back_material)
                         setNavigationOnClickListener {
@@ -111,7 +127,8 @@ open class WinePage : Fragment() {
 
 
     fun initPage(init: PageBuild.() -> Unit) {
-        viewList = PageBuild().apply(init).viewList
+        val list = PageBuild().apply(init).viewList
+        viewList.addAll(list)
     }
 
     fun toPage(page: Class<out WinePage>) {
@@ -120,5 +137,10 @@ open class WinePage : Fragment() {
 
     fun backPage() {
         requireActivity().onBackPressedDispatcher.onBackPressed()
+    }
+
+    fun reloadPage() {
+        binding.fragmentContainer.removeAllViews()
+        init()
     }
 }

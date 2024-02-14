@@ -7,7 +7,7 @@
             android:label="@string/app_name"
             android:supportsRtl="true"
             android:theme="@style/Theme.WineUI">
-        <!--     切记将主题设置为@style/Theme.WineUI       -->
+        <!--     将主题设置为@style/Theme.WineUI       -->
         <activity
                 android:name=".DemoActivity"
                 android:exported="true">

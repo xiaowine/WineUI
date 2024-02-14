@@ -1,6 +1,7 @@
 package cn.xiaowine.app.pages
 
 import cn.xiaowine.ui.WinePage
+import cn.xiaowine.ui.dialog.WineWaitDialog
 
 // 1.继承WinePage
 // 2.初始化页面initPage
@@ -14,12 +15,25 @@ class MainPage : WinePage() {
             title {
                 text = "标题"
             }
-            toPageText(page = TextPage::class.java)
-            toPageText(page = SwitchPage::class.java)
-            toPageText(page = SeeKBarPage::class.java)
-            toPageText(page = DialogPage::class.java)
-            toPageText(page = CustomPage::class.java)
-            toPageText(page = CardPage::class.java)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val wineWaitDialog = WineWaitDialog(requireContext()).apply {
+            setTitle("加载中")
+            show()
+        }
+        initPage {
+            pageItems.forEach {
+                if (it.page == this@MainPage::class.java) {
+                    return@forEach
+                }
+                toPageText(page = it.page)
+            }
+        }
+        reloadPage()
+        wineWaitDialog.dismiss()
+
     }
 }

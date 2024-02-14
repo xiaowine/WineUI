@@ -13,10 +13,10 @@ import androidx.annotation.StringRes
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import cn.xiaowine.ui.R
-import cn.xiaowine.ui.Tools
+import cn.xiaowine.ui.tools.Tools
 import cn.xiaowine.ui.databinding.WineDialogProgressbarBinding
 
-class WineProgressBar(context: Context) : Dialog(context, R.style.Theme_WineDialog) {
+class WineWaitDialog(context: Context) : Dialog(context, R.style.Theme_WineDialog) {
 
     private var _binding: WineDialogProgressbarBinding? = null
     private val binding: WineDialogProgressbarBinding get() = _binding!!

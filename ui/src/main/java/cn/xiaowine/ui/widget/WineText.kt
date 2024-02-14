@@ -16,7 +16,7 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import cn.xiaowine.ui.R
 import cn.xiaowine.ui.databinding.WineTextBinding
-import cn.xiaowine.ui.Tools.dp2px
+import cn.xiaowine.ui.tools.Tools.dp2px
 
 
 class WineText(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : ConstraintLayout(context, attrs, defStyleAttr) {

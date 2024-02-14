@@ -6,11 +6,11 @@ import android.widget.LinearLayout
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import cn.xiaowine.ui.R
-import cn.xiaowine.ui.Tools.dp2px
+import cn.xiaowine.ui.tools.Tools.dp2px
 import cn.xiaowine.ui.build.CardViewBuild
 
 class WineCard(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : CardView(context, attrs, defStyleAttr) {
-    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, androidx.cardview.R.attr.cardViewStyle)
     constructor(context: Context) : this(context, null)
 
     private val content: LinearLayout

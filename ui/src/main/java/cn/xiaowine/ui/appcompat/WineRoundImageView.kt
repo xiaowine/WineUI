@@ -14,13 +14,13 @@ import androidx.appcompat.widget.AppCompatImageView
 
 
 class WineRoundImageView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : AppCompatImageView(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
+    constructor(context: Context) : this(context, null)
+
     private var paint: Paint? = null
     private var paint2: Paint? = null
     val roundWidth: Int = 25
     val roundHeight: Int = 25
-
-    constructor(context: Context) : this(context, null, 0)
-    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
     init {
         paint = Paint()

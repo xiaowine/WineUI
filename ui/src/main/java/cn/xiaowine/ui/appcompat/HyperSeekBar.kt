@@ -18,12 +18,12 @@ import android.widget.SeekBar
 import androidx.appcompat.widget.AppCompatSeekBar
 import androidx.core.content.ContextCompat
 import cn.xiaowine.ui.R
-import cn.xiaowine.ui.Tools
+import cn.xiaowine.ui.tools.Tools
 import kotlin.math.abs
 
 
 class HyperSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : AppCompatSeekBar(context, attrs, defStyleAttr) {
-    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, androidx.appcompat.R.attr.seekBarStyle)
     constructor(context: Context) : this(context, null)
 
     private var downTime: Long = 0

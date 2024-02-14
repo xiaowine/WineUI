@@ -3,7 +3,6 @@ package cn.xiaowine.ui.dialog
 import android.app.Dialog
 import android.content.Context
 import android.content.res.Configuration
-import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
@@ -17,9 +16,9 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import cn.xiaowine.ui.R
-import cn.xiaowine.ui.Tools.createRoundShape
-import cn.xiaowine.ui.Tools.dp2px
-import cn.xiaowine.ui.Tools.getProp
+import cn.xiaowine.ui.tools.Tools.createRoundShape
+import cn.xiaowine.ui.tools.Tools.dp2px
+import cn.xiaowine.ui.tools.Tools.getProp
 import cn.xiaowine.ui.appcompat.HyperButton
 import cn.xiaowine.ui.databinding.WineDialogBinding
 

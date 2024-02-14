@@ -9,9 +9,13 @@ import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import cn.xiaowine.ui.R
-import cn.xiaowine.ui.Tools.dp2px
+import cn.xiaowine.ui.tools.Tools.dp2px
 
-class HyperEditText(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : AppCompatEditText(context, attrs, defStyleAttr) {
+class HyperEditText(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int) : AppCompatEditText(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, androidx.appcompat.R.attr.editTextStyle)
+    constructor(context: Context) : this(context, null)
+
+
     init {
         minHeight = dp2px(context, 50f)
         layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
@@ -28,4 +32,16 @@ class HyperEditText(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
         }
         setHintTextColor(context.getColor(R.color.edittext_hit_color))
     }
+
+    override fun setSingleLine(singleLine: Boolean) {
+        super.setSingleLine(singleLine)
+        (layoutParams as LinearLayout.LayoutParams).apply {
+            height = if (singleLine) {
+                dp2px(context, 50f)
+            } else {
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            }
+        }
+    }
+
 }

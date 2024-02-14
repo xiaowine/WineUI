@@ -1,7 +1,7 @@
 #这是什么
-![](https://cia.hyperos.mi.com/hyperos-homepage/light_hyperos.svg)
-###这是一个模仿HyperOS风格制作的DSL界面库
-适合快速编写模仿HyperOS风格的软件/模块
+
+### 这是一个模仿`HyperOS`风格制作的DSL界面库
+适合快速编写模仿`HyperOS`风格的软件/模块
 本库一切行为，与小米无关
 
 ## 已经实现可快速使用的组件
@@ -95,6 +95,7 @@ class DemoActivity : WineActivity() {
             PageData(SwitchPage::class.java)
         )
 //        或通过扫描包名注册页面（全部按照默认配置生成界面），两种方式可以混用，后注册的覆盖先注册的
+//        使用扫描包名注册页面，需要在在混淆规则中添加规则暴露包名下的所有类
         registerPage("cn.xiaowine.app.pages", MainPage::class.java)
     }
 }

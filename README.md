@@ -1,4 +1,6 @@
-#这是什么
+![](https://socialify.git.ci/xiaowine/WineUI/image?description=1&descriptionEditable=一个模仿`HyperOS`风格制作的DSL界面库&language=1&name=1&owner=1&theme=Auto)
+
+# 这是什么
 
 ### 这是一个模仿`HyperOS`风格制作的DSL界面库
 适合快速编写模仿`HyperOS`风格的软件/模块
@@ -17,7 +19,7 @@
 - [x] 自定义组件 (custom)
   具体可查看 cn/xiaowine/ui/build/PageBuild.kt
 
-#如何使用
+# 如何使用
 
 ### 1. 项目 Gradle 添加 JitPack 依赖
 
@@ -138,3 +140,10 @@ class MainPage : WinePage() {
 -keep class cn.xiaowine.ui.data.** { *; }
 -keep class cn.xiaowine.ui.widget.**{ <init>(...);}
 ```
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=xiaowine/Lyric-Getter&type=Timeline)](https://star-history.com/#xiaowine/Lyric-Getter&Timeline)
+
+## Thanks
+[<img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png" width="200"/>](https://www.jetbrains.com)

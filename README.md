@@ -95,7 +95,7 @@ class DemoActivity : WineActivity() {
             PageData(SwitchPage::class.java)
         )
 //        或通过扫描包名注册页面（全部按照默认配置生成界面），两种方式可以混用，后注册的覆盖先注册的
-//        registerPage("cn.xiaowine.app.pages", MainPage::class.java)
+        registerPage("cn.xiaowine.app.pages", MainPage::class.java)
     }
 }
 ```
@@ -128,4 +128,12 @@ class MainPage : WinePage() {
         }
     }
 }
+```
+
+### !!!注意，如果你开启了混淆，请添加以下规则
+
+```pro
+-keep class cn.xiaowine.ui.annotation.** { *; }
+-keep class cn.xiaowine.ui.data.** { *; }
+-keep class cn.xiaowine.ui.widget.**{ <init>(...);}
 ```

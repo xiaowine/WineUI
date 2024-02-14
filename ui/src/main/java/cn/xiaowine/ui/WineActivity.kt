@@ -72,8 +72,10 @@ open class WineActivity : AppCompatActivity() {
     }
 
     fun registerPage(vararg allPageData: PageData) {
-        pageItems.removeIf { pageItem ->
-            allPageData.any { it.page == pageItem.page }
+        pageItems.forEach { item ->
+            if (allPageData.any { it.page == item.page }) {
+                pageItems.remove(item)
+            }
         }
         pageItems.addAll(allPageData)
         if (pageViewModel.nowPage.value == null) {
@@ -85,8 +87,10 @@ open class WineActivity : AppCompatActivity() {
     @Suppress("UNCHECKED_CAST")
     fun registerPage(packages: String, homePage: Class<out WinePage>) {
         val scanPages = scanPages(this, packages)
-        pageItems.removeIf { pageItem ->
-           scanPages.any { it == pageItem.page }
+        pageItems.forEach { item ->
+            if (scanPages.any { it == item.page }) {
+                pageItems.remove(item)
+            }
         }
         scanPages.forEach {
             if (it == homePage) {

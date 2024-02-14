@@ -27,10 +27,10 @@ class WineCardLink(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : 
         layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT).apply {
             setMargins(0, dp2px(context, 10f), 0, dp2px(context, 10f))
         }
-        setTextColor(context.getColor(R.color.card_link_color))
         setTextColor(ContextCompat.getColor(context, R.color.card_link_color))
         setTextSize(TypedValue.COMPLEX_UNIT_SP, 18.5f)
     }
+
     fun onClick(onClick: (() -> Unit)? = null) {
         setOnClickListener {
             onClick?.invoke()

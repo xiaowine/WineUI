@@ -22,7 +22,7 @@ class HyperEditText(context: Context, attrs: AttributeSet? = null, defStyleAttr:
             setMargins(dp2px(context, 30f), 0, dp2px(context, 30f), 0)
         }
         setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
-        setTextColor(context.getColor(R.color.title_text_color))
+        setTextColor(ContextCompat.getColor(context, R.color.title_text_color))
         gravity = Gravity.CENTER_VERTICAL
         background = GradientDrawable().apply {
             shape = GradientDrawable.RECTANGLE

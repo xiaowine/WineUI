@@ -28,9 +28,12 @@ class WineSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : C
     private var _binding: WineSeekBinding? = null
     private val binding: WineSeekBinding get() = _binding!!
 
+    //    Android 8.1以上才支持设置最小值
     var minProgress by Delegates.observable(0) { _, _, newValue ->
-        minText.text = newValue.toString()
-        seekBar.min = newValue
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            minText.text = newValue.toString()
+            seekBar.min = newValue
+        }
     }
     var maxProgress by Delegates.observable(0) { _, _, newValue ->
         maxText.text = newValue.toString()

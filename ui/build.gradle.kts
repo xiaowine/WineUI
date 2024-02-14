@@ -9,13 +9,7 @@ android {
     namespace = "cn.xiaowine.ui"
     compileSdk = 34
     defaultConfig {
-        minSdk = 27
-    }
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-        }
+        minSdk = 21
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17

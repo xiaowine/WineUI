@@ -19,3 +19,7 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-optimizationpasses 5
+-keep class cn.xiaowine.ui.annotation.** { *; }
+-keep class cn.xiaowine.ui.data.** { *; }
+-keep class cn.xiaowine.ui.widget.**{ <init>(...);}

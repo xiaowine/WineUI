@@ -11,7 +11,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        minSdk = 27
+        minSdk = 21
         targetSdk = 34
         versionCode = 2
         versionName = "1.1"

@@ -39,14 +39,12 @@ open class WinePage : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.fragmentContainer.let {
-            if (this::class.java.getAnnotation(Coroutine::class.java) != null) {
-                CoroutineScope(Dispatchers.Main).launch {
-                    addView2Root()
-                }
-            } else {
+        if (this::class.java.getAnnotation(Coroutine::class.java) != null) {
+            CoroutineScope(Dispatchers.Main).launch {
                 addView2Root()
             }
+        } else {
+            addView2Root()
         }
     }
 
@@ -59,21 +57,18 @@ open class WinePage : Fragment() {
         binding.apply {
             toolbar.title = this@WinePage::class.java.simpleName
             fragmentContainer.apply {
-                CoroutineScope(Dispatchers.Main).launch {
-                    viewList.forEach {
-                        if (!isAdded) return@launch
-                        val view = it.first.getDeclaredConstructor(Context::class.java)
-                            .newInstance(requireContext())
-                        addView(view.apply {
-                            it.second.invoke(this)
-                            if (this::class.java.name != WineCard::class.java.name) setPadding(dp2px(context, 28f), 0, dp2px(context, 28f), 0)
-                            findViewById<TextView>(R.id.summary_view)?.let { summaryView ->
-                                if (summaryView.text.isEmpty()) {
-                                    summaryView.visibility = View.GONE
-                                }
+                viewList.forEach {
+                    if (!isAdded) return
+                    val view = it.first.getDeclaredConstructor(Context::class.java).newInstance(requireContext())
+                    addView(view.apply {
+                        it.second.invoke(this)
+                        if (this::class.java.name != WineCard::class.java.name) setPadding(dp2px(context, 28f), 0, dp2px(context, 28f), 0)
+                        findViewById<TextView>(R.id.summary_view)?.let { summaryView ->
+                            if (summaryView.text.isEmpty()) {
+                                summaryView.visibility = View.GONE
                             }
-                        })
-                    }
+                        }
+                    })
                 }
             }
             collapsingToolbarLayout.apply {

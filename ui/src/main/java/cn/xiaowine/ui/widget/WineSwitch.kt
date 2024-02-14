@@ -56,8 +56,10 @@ class WineSwitch(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Co
         }
 
     fun onClick(onClick: ((Boolean) -> Unit)? = null) {
-        switchView.setOnCheckedChangeListener { _, b ->
-            onClick?.invoke(b)
+        switchView.setOnCheckedChangeListener { v, b ->
+            if (v.isPressed) {
+                onClick?.invoke(b)
+            }
         }
     }
 
@@ -88,6 +90,7 @@ class WineSwitch(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Co
 
     init {
         _binding = WineSwitchBinding.inflate(LayoutInflater.from(context), this, true)
+        constraintLayout.setOnClickListener { switchView.performClick() }
         titleView.apply {
             setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {

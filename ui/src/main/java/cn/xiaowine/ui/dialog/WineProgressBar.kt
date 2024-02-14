@@ -66,4 +66,7 @@ class WineProgressBar(context: Context) : Dialog(context, R.style.Theme_WineDial
     fun setTitle(title: String) {
         titleView.text = title
     }
+    override fun setTitle(title: Int) {
+        titleView.setText(title)
+    }
 }

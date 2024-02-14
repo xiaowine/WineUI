@@ -97,17 +97,22 @@ open class WinePage : Fragment() {
             val wineActivity = activity as WineActivity
             val find = wineActivity.pageItems.find { it.page == wineActivity.pageQueue.last() } ?: return
             binding.apply {
-                scrollView.scrollX = 0
                 collapsingToolbarLayout.apply {
                     collapsedTitleGravity = if (find.isHome) Gravity.CENTER else Gravity.START
                     title = find.title ?: getString(find.titleRes)
                 }
                 if (!find.isHome) {
-                    toolbar.setNavigationIcon(androidx.appcompat.R.drawable.abc_ic_ab_back_material)
+                    toolbar.apply {
+                        setNavigationIcon(androidx.appcompat.R.drawable.abc_ic_ab_back_material)
+                        setNavigationOnClickListener {
+                            backPage()
+                        }
+                    }
                 }
             }
         }
     }
+
 
     fun initPage(init: PageBuild.() -> Unit) {
         viewList = PageBuild().apply(init).viewList
@@ -118,6 +123,6 @@ open class WinePage : Fragment() {
     }
 
     fun backPage() {
-        pageViewModel.nowPage.postValue(TogglePageDate(null, this::class.java))
+        requireActivity().onBackPressedDispatcher.onBackPressed()
     }
 }

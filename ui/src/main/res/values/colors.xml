@@ -21,4 +21,5 @@
     <color name="button_cancel_disable_color">#F0F0F0</color>
     <color name="button_cancel_color">#F0F0F0</color>
     <color name="button_cancel_text_color">#303030</color>
+    <color name="progress_color">#000000</color>
 </resources>

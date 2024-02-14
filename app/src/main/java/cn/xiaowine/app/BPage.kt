@@ -2,6 +2,7 @@ package cn.xiaowine.app
 
 import cn.xiaowine.ui.annotation.Coroutine
 import cn.xiaowine.ui.page.WinePage
+
 @Coroutine
 class BPage : WinePage() {
 
@@ -17,6 +18,12 @@ class BPage : WinePage() {
                 title = "backPage"
                 onClick {
                     backPage()
+                }
+            }
+            text {
+                title = "to BPage"
+                onClick {
+                    toPage(CPage::class.java)
                 }
             }
             for (i in 0..100) {

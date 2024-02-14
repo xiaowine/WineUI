@@ -3,6 +3,7 @@ package cn.xiaowine.app
 import android.os.Bundle
 import cn.xiaowine.ui.WineActivity
 import cn.xiaowine.ui.data.PageData
+import cn.xiaowine.ui.dialog.WineProgressBar
 
 class DemoActivity : WineActivity() {
 

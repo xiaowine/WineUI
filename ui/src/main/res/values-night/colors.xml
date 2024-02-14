@@ -9,11 +9,12 @@
     <color name="card_title_color">@android:color/white</color>
     <color name="seekbar_bg_color">#333333</color>
     <color name="button_disable_text_color">#677893</color>
-    <color name="dialog_background_color">#333333</color>
+    <color name="dialog_background_color">#232323</color>
     <color name="button_disable_color">#253E64</color>
     <color name="button_pressed_color">#0d7AEC</color>
-    <color name="button_text_color">#C8C8C8</color>
+    <color name="button_text_color">@android:color/white</color>
     <color name="button_cancel_color">#454545</color>
     <color name="button_cancel_text_color">#C8C8C8</color>
     <color name="button_cancel_pressed_color">#5A5A5A</color>
+    <color name="progress_color">#FFFFFF</color>
 </resources>

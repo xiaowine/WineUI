@@ -21,7 +21,7 @@ import cn.xiaowine.ui.Tools.getProp
 import cn.xiaowine.ui.appcompat.HyperButton
 import cn.xiaowine.ui.databinding.WineDialogBinding
 
-class WineDialog(context: Context) : Dialog(context, R.style.Theme_WineDialog) {
+open class WineDialog(context: Context) : Dialog(context, R.style.Theme_WineDialog) {
     private var _binding: WineDialogBinding? = null
     private val binding: WineDialogBinding get() = _binding!!
     val titleView: AppCompatTextView

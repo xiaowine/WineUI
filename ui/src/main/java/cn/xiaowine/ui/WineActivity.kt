@@ -1,8 +1,6 @@
 package cn.xiaowine.ui
 
 import android.os.Bundle
-import android.util.Log
-import android.view.MenuItem
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -39,16 +37,16 @@ open class WineActivity : AppCompatActivity() {
         setContentView(binding.root)
         pageViewModel.nowPage.observe(this) {
             if (it.now == null) {
-                Log.d("WineActivity", "onCreate: ${pageQueue.last()}")
                 pageQueue.remove(it.last)
-                Log.d("WineActivity", "onCreate: ${pageQueue.last()}")
                 if (pageQueue.isEmpty()) {
                     finish()
                     return@observe
                 }
                 performFragmentTransaction(pageQueue.last(), true)
             } else {
-                if (!isHeavyLoad) pageQueue.add(it.now)
+                if (!isHeavyLoad) {
+                    pageQueue.add(it.now)
+                }
                 performFragmentTransaction(it.now, false)
             }
 
@@ -56,10 +54,6 @@ open class WineActivity : AppCompatActivity() {
         setupOnBackPressedCallback()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        onBackPressedDispatcher.onBackPressed()
-        return super.onOptionsItemSelected(item)
-    }
 
     private fun setupOnBackPressedCallback() {
         val callback = object : OnBackPressedCallback(true) {
@@ -68,9 +62,7 @@ open class WineActivity : AppCompatActivity() {
                     finish()
                     return
                 }
-                val pageClass = pageQueue.last()
-                pageViewModel.nowPage.postValue(TogglePageDate(null, pageClass))
-//                performFragmentTransaction(pageClass, true)
+                pageViewModel.nowPage.postValue(TogglePageDate(null, pageQueue.last()))
             }
         }
         onBackPressedDispatcher.addCallback(this, callback)

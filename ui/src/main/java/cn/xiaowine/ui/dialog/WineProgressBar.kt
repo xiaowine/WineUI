@@ -3,6 +3,8 @@ package cn.xiaowine.ui.dialog
 import android.app.Dialog
 import android.content.Context
 import android.content.res.Configuration
+import android.graphics.drawable.LayerDrawable
+import android.graphics.drawable.RotateDrawable
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
@@ -57,6 +59,14 @@ class WineProgressBar(context: Context) : Dialog(context, R.style.Theme_WineDial
                 width = Tools.dp2px(context, 25f)
                 height = Tools.dp2px(context, 25f)
             }
+            val rotateDrawable = RotateDrawable().apply {
+                drawable = ContextCompat.getDrawable(context, R.drawable.progress_icon)
+                fromDegrees = 0f
+                toDegrees = 1080f
+                pivotX = 0.5f
+                pivotY = 0.5f
+            }
+            indeterminateDrawable =  LayerDrawable(arrayOf(rotateDrawable))
         }
         binding.root.apply {
             setPadding(Tools.dp2px(context, 32f), 0, 0, 0)

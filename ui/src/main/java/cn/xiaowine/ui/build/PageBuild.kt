@@ -30,7 +30,16 @@ class PageBuild {
     fun card(init: WineCard.() -> Unit) {
         viewList.add(Pair(WineCard::class.java) { init.invoke(this as WineCard) })
     }
+
     fun seekbar(init: WineSeekBar.() -> Unit) {
         viewList.add(Pair(WineSeekBar::class.java) { init.invoke(this as WineSeekBar) })
+    }
+
+    //
+//    fun <T : View> custom(view: View, init: T.() -> Unit) {
+//        viewList.add(Pair(view::class.java) { init.invoke(this as T) })
+//    }
+    fun custom(customView: Class<out View>, init: (View) -> Unit) {
+        viewList.add(Pair(customView) { init.invoke(this) })
     }
 }

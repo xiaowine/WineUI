@@ -17,4 +17,6 @@
     <color name="button_cancel_text_color">#C8C8C8</color>
     <color name="button_cancel_pressed_color">#5A5A5A</color>
     <color name="progress_color">#FFFFFF</color>
+    <color name="dialog_edit_background_color">#343434</color>
+    <color name="edittext_hit_color">#5C5C5C</color>
 </resources>

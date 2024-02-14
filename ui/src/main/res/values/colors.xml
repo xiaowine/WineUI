@@ -22,4 +22,6 @@
     <color name="button_cancel_color">#F0F0F0</color>
     <color name="button_cancel_text_color">#303030</color>
     <color name="progress_color">#000000</color>
+    <color name="dialog_edit_background_color">#f4f4f4</color>
+    <color name="edittext_hit_color">#5C5C5C</color>
 </resources>

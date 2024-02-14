@@ -2,11 +2,15 @@ package cn.xiaowine.ui.appcompat
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.drawable.ClipDrawable
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.LayerDrawable
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.MotionEvent
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -16,7 +20,6 @@ import androidx.core.content.ContextCompat
 import cn.xiaowine.ui.R
 import cn.xiaowine.ui.Tools
 import kotlin.math.abs
-
 
 
 class HyperSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : AppCompatSeekBar(context, attrs, defStyleAttr) {
@@ -43,7 +46,22 @@ class HyperSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : 
 
     init {
         layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-        progressDrawable = ContextCompat.getDrawable(context, R.drawable.seekbar_progress)
+        val backgroundDrawable = GradientDrawable().apply {
+            shape = GradientDrawable.RECTANGLE
+            cornerRadius = 50f
+            orientation = GradientDrawable.Orientation.TOP_BOTTOM
+            setColor(ContextCompat.getColor(context, R.color.seekbar_bg_color))
+        }
+        val progressDrawable = GradientDrawable().apply {
+            shape = GradientDrawable.RECTANGLE
+            cornerRadius = 50f
+            setColor(ContextCompat.getColor(context, R.color.seekbar_color))
+        }
+        val clipDrawable = ClipDrawable(progressDrawable, Gravity.START, ClipDrawable.HORIZONTAL)
+        this.progressDrawable = LayerDrawable(arrayOf(backgroundDrawable, clipDrawable)).apply {
+            setId(0, android.R.id.background)
+            setId(1, android.R.id.progress)
+        }
         indeterminateDrawable = ContextCompat.getDrawable(context, R.color.seekbar_color)
         thumb = null
         background = null

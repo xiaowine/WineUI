@@ -3,6 +3,7 @@ package cn.xiaowine.ui.dialog
 import android.app.Dialog
 import android.content.Context
 import android.content.res.Configuration
+import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
@@ -53,9 +54,10 @@ open class WineDialog(context: Context) : Dialog(context, R.style.Theme_WineDial
             connect(messageView.id, ConstraintSet.TOP, titleView.id, ConstraintSet.BOTTOM, dp2px(context, 12f))
             connect(messageView.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, dp20toPx)
             connect(messageView.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, dp20toPx)
+            connect(customizAreaeView.id, ConstraintSet.TOP, messageView.id, ConstraintSet.BOTTOM, dp2px(context, 12f))
             connect(buttonAreaView.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, dp20toPx)
             connect(buttonAreaView.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, dp20toPx)
-            connect(buttonAreaView.id, ConstraintSet.TOP, R.id.customize_area_view, ConstraintSet.TOP, dp2px(context, 14f))
+            connect(buttonAreaView.id, ConstraintSet.TOP, customizAreaeView.id, ConstraintSet.BOTTOM, dp2px(context, 14f))
             connect(buttonAreaView.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, dp20toPx)
             applyTo(constraintLayout)
         }

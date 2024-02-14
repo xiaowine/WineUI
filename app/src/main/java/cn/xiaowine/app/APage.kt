@@ -2,7 +2,9 @@ package cn.xiaowine.app
 
 import android.widget.SeekBar
 import android.widget.Toast
+import cn.xiaowine.ui.appcompat.HyperEditText
 import cn.xiaowine.ui.dialog.WineDialog
+import cn.xiaowine.ui.dialog.WineEditTextDialog
 import cn.xiaowine.ui.dialog.WineProgressBar
 import cn.xiaowine.ui.page.WinePage
 import cn.xiaowine.ui.widget.WineSeekBar
@@ -11,6 +13,11 @@ class APage : WinePage() {
 
     init {
         initPage {
+            custom(HyperEditText::class.java) {
+                (it as HyperEditText).apply {
+                    hint = "请输入"
+                }
+            }
             title {
                 text = this@APage::class.java.simpleName
             }
@@ -109,7 +116,7 @@ class APage : WinePage() {
             }
             seekbar {
                 minProgress = -200
-                maxProgress = 250
+                maxProgress = 200
                 onProgressChanged(object : WineSeekBar.ProgressChangedListener {
                     override fun onChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                         Toast.makeText(context, "progress:$progress", Toast.LENGTH_SHORT).show()
@@ -120,7 +127,6 @@ class APage : WinePage() {
                 }
             }
             line()
-
             text {
                 title = "Show Dialog"
                 onClick {
@@ -184,6 +190,24 @@ class APage : WinePage() {
                 onClick {
                     WineProgressBar(requireContext()).apply {
                         setTitle("标题")
+                        show()
+                    }
+                }
+            }
+            text {
+                title = "Show WineEditTextDialog"
+                onClick {
+                    WineEditTextDialog(context).apply {
+                        setTitle("标题")
+                        setMessage("这是一个消息")
+                        addButton("确定") {
+                            Toast.makeText(context, "确定", Toast.LENGTH_SHORT).show()
+                            dismiss()
+                        }
+                        addButton("取消") {
+                            Toast.makeText(context, "取消", Toast.LENGTH_SHORT).show()
+                            dismiss()
+                        }.setCancel(true)
                         show()
                     }
                 }

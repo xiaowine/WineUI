@@ -1,16 +1,11 @@
 package cn.xiaowine.ui
 
-import android.graphics.Typeface
-import android.os.Build
 import android.os.Bundle
-import android.view.Gravity
+import android.util.Log
 import android.view.MenuItem
-import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import cn.xiaowine.ui.Tools.dp2px
-import cn.xiaowine.ui.Tools.showView
 import cn.xiaowine.ui.data.PageData
 import cn.xiaowine.ui.data.TogglePageDate
 import cn.xiaowine.ui.databinding.ActivityWineBinding
@@ -20,51 +15,41 @@ import cn.xiaowine.ui.viewmodel.PageViewModel
 
 open class WineActivity : AppCompatActivity() {
     private val pageViewModel: PageViewModel by lazy { ViewModelProvider(this)[PageViewModel::class.java] }
+    var pageItems: MutableList<PageData>
+        get() = pageViewModel.pageItems.value!!
+        set(value) {
+            pageViewModel.pageItems.postValue(value)
+        }
 
-    val pageItems: MutableList<PageData> = mutableListOf()
-
-    val pageQueue: MutableList<Class<out WinePage>> = mutableListOf()
+    var pageQueue: MutableList<Class<out WinePage>>
+        get() = pageViewModel.pageQueue.value!!
+        set(value) {
+            pageViewModel.pageQueue.postValue(value)
+        }
 
     private var _binding: ActivityWineBinding? = null
     private val binding get() = _binding!!
 
-    private var savedState: Bundle? = null
+    private var isHeavyLoad: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        savedState = savedInstanceState
+        isHeavyLoad = savedInstanceState != null
         _binding = ActivityWineBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setSupportActionBar(binding.toolbar)
-        binding.collapsingToolbarLayout.apply {
-            expandedTitleTextSize = dp2px(context, 30f).toFloat()
-            collapsedTitleTextSize = dp2px(context, 20f).toFloat()
-            setCollapsedTitleTypeface(
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                    Typeface.create(null, 400, false)
-                } else {
-                    Typeface.defaultFromStyle(Typeface.NORMAL)
-                }
-            )
-            setExpandedTitleTypeface(
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                    Typeface.create(null, 300, false)
-                } else {
-                    Typeface.defaultFromStyle(Typeface.NORMAL)
-                }
-            )
-        }
         pageViewModel.nowPage.observe(this) {
             if (it.now == null) {
+                Log.d("WineActivity", "onCreate: ${pageQueue.last()}")
                 pageQueue.remove(it.last)
+                Log.d("WineActivity", "onCreate: ${pageQueue.last()}")
                 if (pageQueue.isEmpty()) {
                     finish()
                     return@observe
                 }
-                toPage(pageQueue.last(), true)
+                performFragmentTransaction(pageQueue.last(), true)
             } else {
-                pageQueue.add(it.now)
-                toPage(it.now, false)
+                if (!isHeavyLoad) pageQueue.add(it.now)
+                performFragmentTransaction(it.now, false)
             }
 
         }
@@ -83,8 +68,9 @@ open class WineActivity : AppCompatActivity() {
                     finish()
                     return
                 }
-                toPage(pageQueue[pageQueue.lastIndex - 1], true)
-                pageQueue.remove(pageQueue.last())
+                val pageClass = pageQueue.last()
+                pageViewModel.nowPage.postValue(TogglePageDate(null, pageClass))
+//                performFragmentTransaction(pageClass, true)
             }
         }
         onBackPressedDispatcher.addCallback(this, callback)
@@ -98,25 +84,6 @@ open class WineActivity : AppCompatActivity() {
         }
     }
 
-    private fun toPage(page: Class<out WinePage>, isExit: Boolean) {
-        val find = pageItems.find { it.page == page } ?: error("No page")
-        binding.apply {
-            scrollView.scrollX = 0
-            collapsingToolbarLayout.apply {
-                collapsedTitleGravity = if (find.isHome) Gravity.CENTER else Gravity.START
-                title = find.title ?: getString(find.titleRes)
-            }
-            supportActionBar?.apply {
-                setDisplayHomeAsUpEnabled(!find.isHome)
-                setHomeButtonEnabled(!find.isHome)
-            }
-        }
-        binding.appBar.apply {
-            visibility = View.GONE
-            showView(400)
-        }
-        performFragmentTransaction(page, isExit)
-    }
 
     private fun performFragmentTransaction(page: Class<out WinePage>, isExit: Boolean) {
         supportFragmentManager

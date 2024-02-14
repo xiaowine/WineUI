@@ -1,6 +1,7 @@
 package cn.xiaowine.ui.build
 
 import android.view.View
+import cn.xiaowine.ui.page.WinePage
 import cn.xiaowine.ui.widget.WineCard
 import cn.xiaowine.ui.widget.WineLine
 import cn.xiaowine.ui.widget.WineSeekBar
@@ -10,6 +11,25 @@ import cn.xiaowine.ui.widget.WineTitle
 
 class PageBuild {
     val viewList = ArrayList<Pair<Class<out View>, View.() -> Unit>>()
+
+    fun WinePage.toPageText(text: String? = null, page: Class<out WinePage>) {
+        text {
+            title = text ?: "to ${page.simpleName}"
+            onClick {
+                toPage(page)
+            }
+        }
+    }
+
+    fun WinePage.toPageText() {
+        text {
+            title = "backPage"
+            onClick {
+                backPage()
+            }
+        }
+        line()
+    }
 
     fun text(init: WineText.() -> Unit) {
         viewList.add(Pair(WineText::class.java) { init.invoke(this as WineText) })

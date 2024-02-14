@@ -31,4 +31,16 @@ class WineCardLink(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : 
         setTextColor(ContextCompat.getColor(context, R.color.card_link_color))
         setTextSize(TypedValue.COMPLEX_UNIT_SP, 18.5f)
     }
+    fun onClick(onClick: (() -> Unit)? = null) {
+        setOnClickListener {
+            onClick?.invoke()
+        }
+    }
+
+    fun onLongClick(onLongClick: (() -> Unit)? = null) {
+        setOnLongClickListener {
+            onLongClick?.invoke()
+            true
+        }
+    }
 }

@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -63,7 +62,9 @@ open class WinePage : Fragment() {
                     val view = it.first.getDeclaredConstructor(Context::class.java).newInstance(requireContext())
                     addView(view.apply {
                         it.second.invoke(this)
-                        if (this::class.java.name != WineCard::class.java.name) setPadding(dp2px(context, 28f), 0, dp2px(context, 28f), 0)
+                        if (this::class.java.name != WineCard::class.java.name) {
+                            setPadding(dp2px(context, 28f), 0, dp2px(context, 28f), 0)
+                        }
                         findViewById<TextView>(R.id.summary_view)?.let { summaryView ->
                             if (summaryView.text.isEmpty()) {
                                 summaryView.visibility = View.GONE
@@ -71,6 +72,7 @@ open class WinePage : Fragment() {
                         }
                     })
                 }
+                setPadding(0, 0, 0, dp2px(context, 30f))
             }
             collapsingToolbarLayout.apply {
                 expandedTitleTextSize = dp2px(context, 30f).toFloat()

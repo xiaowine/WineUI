@@ -2,13 +2,10 @@ package cn.xiaowine.ui.widget
 
 import android.content.Context
 import android.graphics.Typeface
-import android.graphics.drawable.ClipDrawable
-import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.LayerDrawable
 import android.os.Build
 import android.util.AttributeSet
+import android.util.Log
 import android.util.TypedValue
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import android.widget.LinearLayout
@@ -16,8 +13,6 @@ import android.widget.SeekBar
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.core.content.ContextCompat
-import cn.xiaowine.ui.R
 import cn.xiaowine.ui.Tools.dp2px
 import cn.xiaowine.ui.Tools.hideView
 import cn.xiaowine.ui.Tools.showView
@@ -42,9 +37,13 @@ class WineSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : C
         maxText.text = newValue.toString()
         seekBar.max = newValue
     }
-    val nowProgress by Delegates.observable(0) { _, _, newValue ->
-        nowText.text = newValue.toString()
-        seekBar.progress = newValue
+    var nowProgress by Delegates.observable(0) { _, _, newValue ->
+        post {
+            nowText.text = newValue.toString()
+        }
+        post {
+            seekBar.progress = newValue
+        }
     }
 
     private fun AppCompatTextView.createTextView(text: Int): AppCompatTextView {

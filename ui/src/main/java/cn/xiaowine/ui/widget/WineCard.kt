@@ -21,7 +21,7 @@ class WineCard(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Card
         useCompatPadding = false
         setCardBackgroundColor(ContextCompat.getColor(context, R.color.card_bg_color))
         layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT).apply {
-            setMargins(dp2px(context, 15f), 0, dp2px(context, 15f), 0)
+            setMargins(dp2px(context, 15f), dp2px(context, 10f), dp2px(context, 15f), dp2px(context, 10f))
         }
         content = LinearLayout(context).apply {
             orientation = LinearLayout.VERTICAL

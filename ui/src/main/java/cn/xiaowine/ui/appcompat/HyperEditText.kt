@@ -2,6 +2,7 @@ package cn.xiaowine.ui.appcompat
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
+import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
 import android.widget.LinearLayout
@@ -10,7 +11,7 @@ import androidx.core.content.ContextCompat
 import cn.xiaowine.ui.R
 import cn.xiaowine.ui.Tools.dp2px
 
-class HyperEditText(context: Context) : AppCompatEditText(context) {
+class HyperEditText(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : AppCompatEditText(context, attrs, defStyleAttr) {
     init {
         minHeight = dp2px(context, 50f)
         layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
@@ -18,7 +19,7 @@ class HyperEditText(context: Context) : AppCompatEditText(context) {
         }
         setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
         setTextColor(context.getColor(R.color.title_text_color))
-        gravity =  Gravity.CENTER_VERTICAL
+        gravity = Gravity.CENTER_VERTICAL
         background = GradientDrawable().apply {
             shape = GradientDrawable.RECTANGLE
             cornerRadius = dp2px(context, 15f).toFloat()

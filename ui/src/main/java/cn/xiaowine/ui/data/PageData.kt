@@ -1,7 +1,7 @@
 package cn.xiaowine.ui.data
 
 import androidx.annotation.StringRes
-import cn.xiaowine.ui.page.WinePage
+import cn.xiaowine.ui.WinePage
 
 class PageData() {
     lateinit var page: Class<out WinePage>
@@ -10,12 +10,14 @@ class PageData() {
     @StringRes
     var titleRes: Int = -1
     var isHome: Boolean = false
+//    下面俩参数暂未实现
     var showMenu: Boolean = false
     var useCatch: Boolean = false
 
     constructor(
         page: Class<out WinePage>,
         title: String? = null,
+        @StringRes
         titleRes: Int = -1,
         isHome: Boolean = false,
         showMenu: Boolean = false,
@@ -39,7 +41,7 @@ class PageData() {
         this.title = title
     }
 
-    constructor(page: Class<out WinePage>, titleRes: Int) : this() {
+    constructor(page: Class<out WinePage>,@StringRes titleRes: Int) : this() {
         this.page = page
         this.titleRes = titleRes
     }

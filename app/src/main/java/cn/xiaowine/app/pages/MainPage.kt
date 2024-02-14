@@ -1,9 +1,11 @@
 package cn.xiaowine.app.pages
 
-import cn.xiaowine.ui.page.WinePage
+import cn.xiaowine.ui.WinePage
+
+// 1.继承WinePage
+// 2.初始化页面initPage
 
 class MainPage : WinePage() {
-
     init {
         initPage {
             title {

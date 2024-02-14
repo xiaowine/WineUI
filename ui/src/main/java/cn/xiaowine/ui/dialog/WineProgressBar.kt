@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
 import android.widget.ProgressBar
+import androidx.annotation.StringRes
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import cn.xiaowine.ui.R
@@ -76,7 +77,7 @@ class WineProgressBar(context: Context) : Dialog(context, R.style.Theme_WineDial
     fun setTitle(title: String) {
         titleView.text = title
     }
-    override fun setTitle(title: Int) {
+    override fun setTitle(@StringRes title: Int) {
         titleView.setText(title)
     }
 }

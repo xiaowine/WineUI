@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import cn.xiaowine.ui.data.PageData
 import cn.xiaowine.ui.data.TogglePageDate
-import cn.xiaowine.ui.page.WinePage
+import cn.xiaowine.ui.WinePage
 
 class PageViewModel : ViewModel() {
     val nowPage: MutableLiveData<TogglePageDate> = MutableLiveData()

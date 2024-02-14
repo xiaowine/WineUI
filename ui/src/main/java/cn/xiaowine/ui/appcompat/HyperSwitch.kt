@@ -8,7 +8,7 @@ import cn.xiaowine.ui.R
 import cn.xiaowine.ui.Tools.dp2px
 import java.lang.reflect.Field
 
-class HyperSwitch(context: Context, attrs: AttributeSet) : SwitchCompat(context, attrs) {
+class HyperSwitch(context: Context, attrs: AttributeSet, defStyleAttr: Int) : SwitchCompat(context, attrs, defStyleAttr) {
 
     init {
         background = null

@@ -6,7 +6,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_height="match_parent">
 
-    <cn.xiaowine.ui.appcompat.WineRoundCornerImageView
+    <cn.xiaowine.ui.appcompat.WineRoundImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

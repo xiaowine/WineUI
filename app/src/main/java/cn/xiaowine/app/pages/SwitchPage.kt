@@ -2,7 +2,7 @@ package cn.xiaowine.app.pages
 
 import android.widget.Toast
 import cn.xiaowine.app.R
-import cn.xiaowine.ui.page.WinePage
+import cn.xiaowine.ui.WinePage
 
 class SwitchPage : WinePage() {
 

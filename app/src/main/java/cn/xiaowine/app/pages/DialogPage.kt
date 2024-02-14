@@ -5,7 +5,7 @@ import android.widget.Toast
 import cn.xiaowine.ui.dialog.WineDialog
 import cn.xiaowine.ui.dialog.WineEditTextDialog
 import cn.xiaowine.ui.dialog.WineProgressBar
-import cn.xiaowine.ui.page.WinePage
+import cn.xiaowine.ui.WinePage
 @SuppressLint("SetTextI18n")
 class DialogPage : WinePage() {
 

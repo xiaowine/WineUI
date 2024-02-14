@@ -2,7 +2,7 @@ package cn.xiaowine.app.pages
 
 import android.annotation.SuppressLint
 import cn.xiaowine.ui.appcompat.HyperEditText
-import cn.xiaowine.ui.page.WinePage
+import cn.xiaowine.ui.WinePage
 
 @SuppressLint("SetTextI18n")
 class CustomPage : WinePage() {

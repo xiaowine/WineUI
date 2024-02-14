@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelProvider
 import cn.xiaowine.ui.data.PageData
 import cn.xiaowine.ui.data.TogglePageDate
 import cn.xiaowine.ui.databinding.ActivityWineBinding
-import cn.xiaowine.ui.page.WinePage
 import cn.xiaowine.ui.viewmodel.PageViewModel
 
 

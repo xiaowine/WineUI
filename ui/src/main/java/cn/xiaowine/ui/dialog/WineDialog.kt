@@ -11,6 +11,7 @@ import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
+import androidx.annotation.StringRes
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
@@ -126,11 +127,23 @@ open class WineDialog(context: Context) : Dialog(context, R.style.Theme_WineDial
             visibility = if (title.isEmpty()) View.GONE else View.VISIBLE
         }
     }
+    override fun setTitle(@StringRes title: Int) {
+        titleView.apply {
+            setText(title)
+            visibility = if (title == -1) View.GONE else View.VISIBLE
+        }
+    }
 
     fun setMessage(message: String) {
         messageView.apply {
             text = message
             visibility = if (message.isEmpty()) View.GONE else View.VISIBLE
+        }
+    }
+    fun setMessage(@StringRes message: Int) {
+        messageView.apply {
+            setText(message)
+            visibility = if (message == -1) View.GONE else View.VISIBLE
         }
     }
 

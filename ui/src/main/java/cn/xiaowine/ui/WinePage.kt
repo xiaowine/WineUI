@@ -1,4 +1,4 @@
-package cn.xiaowine.ui.page
+package cn.xiaowine.ui
 
 import android.content.Context
 import android.graphics.Typeface
@@ -11,9 +11,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import cn.xiaowine.ui.R
 import cn.xiaowine.ui.Tools.dp2px
-import cn.xiaowine.ui.WineActivity
 import cn.xiaowine.ui.annotation.Coroutine
 import cn.xiaowine.ui.build.PageBuild
 import cn.xiaowine.ui.data.TogglePageDate

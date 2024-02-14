@@ -1,7 +1,7 @@
 package cn.xiaowine.ui.build
 
 import android.view.View
-import cn.xiaowine.ui.page.WinePage
+import cn.xiaowine.ui.WinePage
 import cn.xiaowine.ui.widget.WineCard
 import cn.xiaowine.ui.widget.WineLine
 import cn.xiaowine.ui.widget.WineSeekBar

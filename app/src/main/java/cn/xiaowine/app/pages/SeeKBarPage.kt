@@ -3,7 +3,7 @@ package cn.xiaowine.app.pages
 import android.annotation.SuppressLint
 import android.widget.SeekBar
 import android.widget.Toast
-import cn.xiaowine.ui.page.WinePage
+import cn.xiaowine.ui.WinePage
 import cn.xiaowine.ui.widget.WineSeekBar
 
 @SuppressLint("SetTextI18n")

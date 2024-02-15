@@ -1,8 +1,12 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
+import org.jetbrains.kotlin.konan.properties.Properties
+
 plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.androidApplication)
 }
+val localProperties = Properties()
+if (rootProject.file("local.properties").canRead())
+    localProperties.load(rootProject.file("local.properties").inputStream())
 
 android {
     namespace = "cn.xiaowine.app"
@@ -14,11 +18,30 @@ android {
         versionCode = 2
         versionName = "1.1"
     }
-
+    val config = localProperties.getProperty("androidStoreFile")?.let {
+        signingConfigs.create("config") {
+            storeFile = file(it)
+            storePassword = localProperties.getProperty("androidStorePassword")
+            keyAlias = localProperties.getProperty("androidKeyAlias")
+            keyPassword = localProperties.getProperty("androidKeyPassword")
+            enableV3Signing = true
+            enableV4Signing = true
+        }
+    }
     buildTypes {
+        all {
+            signingConfig = config ?: signingConfigs["debug"]
+        }
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            isShrinkResources = false
+            setProguardFiles(
+                listOf(
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro",
+                    "proguard-log.pro"
+                )
+            )
         }
     }
     compileOptions {

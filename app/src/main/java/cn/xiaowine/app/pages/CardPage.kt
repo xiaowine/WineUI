@@ -3,6 +3,7 @@ package cn.xiaowine.app.pages
 import android.annotation.SuppressLint
 import android.widget.Toast
 import cn.xiaowine.ui.WinePage
+
 @SuppressLint("SetTextI18n")
 class CardPage  : WinePage() {
 

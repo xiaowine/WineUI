@@ -1,5 +1,6 @@
 package cn.xiaowine.ui
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
@@ -72,9 +73,16 @@ open class WineActivity : AppCompatActivity() {
     }
 
     fun registerPage(vararg allPageData: PageData) {
-        pageItems.forEach { item ->
-            if (allPageData.any { it.page == item.page }) {
-                pageItems.remove(item)
+        allPageData.forEach { newData ->
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                pageItems.removeIf { it.page == newData.page }
+            } else {
+                val iterator = pageItems.iterator()
+                while (iterator.hasNext()) {
+                    if (iterator.next().page == newData.page) {
+                        iterator.remove()
+                    }
+                }
             }
         }
         pageItems.addAll(allPageData)
@@ -87,32 +95,26 @@ open class WineActivity : AppCompatActivity() {
     @Suppress("UNCHECKED_CAST")
     fun registerPage(packages: String, homePage: Class<out WinePage>) {
         val scanPages = scanPages(this, packages)
-        pageItems.forEach { item ->
-            if (scanPages.any { it == item.page }) {
-                pageItems.remove(item)
-            }
-        }
         scanPages.forEach {
-            if (it == homePage) {
-                return@forEach
+            if (it != homePage && pageItems.none { item -> item.page == it }) {
+                pageItems.add(PageData(it as Class<out WinePage>))
+            } else if (it == homePage && pageItems.none { item -> item.page == it && item.isHome }) {
+                pageItems.add(PageData(it, isHome = true))
+                if (pageViewModel.nowPage.value == null) {
+                    pageViewModel.nowPage.postValue(TogglePageDate(it, null))
+                }
             }
-            pageItems.add(PageData(it as Class<out WinePage>))
         }
-
-        pageItems.add(PageData(homePage, isHome = true))
     }
 
     private fun performFragmentTransaction(page: Class<out WinePage>, isExit: Boolean) {
-        supportFragmentManager
-            .beginTransaction().apply {
-                if (isExit) {
-                    setCustomAnimations(R.animator.slide_left_in, R.animator.slide_right_out, R.animator.slide_right_in, R.animator.slide_left_out)
-                } else {
-                    setCustomAnimations(R.animator.slide_right_in, R.animator.slide_left_out, R.animator.slide_left_in, R.animator.slide_right_out)
-                }
+        supportFragmentManager.beginTransaction().apply {
+            if (isExit) {
+                setCustomAnimations(R.animator.slide_left_in, R.animator.slide_right_out, R.animator.slide_right_in, R.animator.slide_left_out)
+            } else {
+                setCustomAnimations(R.animator.slide_right_in, R.animator.slide_left_out, R.animator.slide_left_in, R.animator.slide_right_out)
             }
-            .replace(R.id.page, page, null)
-            .commitNow()
+        }.replace(R.id.page, page, null).commitNow()
     }
 
     override fun onDestroy() {

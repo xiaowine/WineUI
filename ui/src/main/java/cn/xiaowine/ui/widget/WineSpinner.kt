@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.StateListDrawable
+import android.os.Build
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -17,17 +18,17 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import cn.xiaowine.ui.R
-import cn.xiaowine.ui.appcompat.HyperButton
 import cn.xiaowine.ui.appcompat.HyperPopup
 import cn.xiaowine.ui.data.SpinnerData
 import cn.xiaowine.ui.tools.DrawableTools.createRoundShape
 import cn.xiaowine.ui.tools.Tools.dp
 
 @SuppressLint("ClickableViewAccessibility")
-class WineSpinner(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : LinearLayout(context, attrs, defStyleAttr) {
+class WineSpinner(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : BaseWineText(context, attrs, defStyleAttr) {
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context) : this(context, null)
 
@@ -35,27 +36,55 @@ class WineSpinner(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : L
 
     val item: MutableList<SpinnerData> = mutableListOf()
     var currentValue: String = ""
+    val textView = TextView(context).apply {
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
+        gravity = Gravity.RIGHT
+        text = currentValue
+        setTextColor(Color.parseColor("#999999"))
+        width = 150.dp
+        setPadding(30.dp, 0, 5.dp, 0)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            paint.typeface = Typeface.create(null, 400, false)
+        } else {
+            paint.typeface = Typeface.defaultFromStyle(Typeface.BOLD)
+        }
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, 15f)
+    }
+    val imageView = ImageView(context).apply {
+        background = ContextCompat.getDrawable(context, R.drawable.ic_spinner)
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    fun onClick(onClick: ((View, MotionEvent) -> Unit)? = null) {
+        binding.root.setOnTouchListener { v, event ->
+            onClick?.invoke(v, event)
+            true
+        }
+    }
 
     init {
-        orientation = VERTICAL
-        addView(HyperButton(context).apply {
-            text = "测试"
-            setOnTouchListener { view, motionEvent ->
-                if (motionEvent.action == MotionEvent.ACTION_UP) {
-                    listPopupWindow.apply {
-                        if (view.width / 2 >= motionEvent.x) {
-                            horizontalOffset = 24.dp
-                            setDropDownGravity(Gravity.LEFT)
-                        } else {
-                            horizontalOffset = (-24).dp
-                            setDropDownGravity(Gravity.RIGHT)
-                        }
-                        show()
+
+        val linearLayout = LinearLayout(context).apply {
+            gravity = Gravity.CENTER_VERTICAL
+            addView(textView)
+            addView(imageView)
+        }
+        addCustomizeView(linearLayout)
+        onClick { view, motionEvent ->
+            if (motionEvent.action == MotionEvent.ACTION_UP) {
+                listPopupWindow.apply {
+                    if (view.width / 2 >= motionEvent.x) {
+                        horizontalOffset = 24.dp
+                        setDropDownGravity(Gravity.LEFT)
+                    } else {
+                        horizontalOffset = (-24).dp
+                        setDropDownGravity(Gravity.RIGHT)
                     }
+                    show()
                 }
-                false
             }
-        })
+        }
+
     }
 
     fun setData(vararg data: SpinnerData) {
@@ -69,20 +98,21 @@ class WineSpinner(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : L
     }
 
     override fun onAttachedToWindow() {
-        if (currentValue.isEmpty()) currentValue = item.first().text
         listPopupWindow.apply {
             anchorView = this@WineSpinner
             loadAdapter()
         }
         super.onAttachedToWindow()
-        listPopupWindow.apply {
-            horizontalOffset = 24.dp
-            setDropDownGravity(Gravity.LEFT)
-            show()
-        }
+//        listPopupWindow.apply {
+//            horizontalOffset = 24.dp
+//            setDropDownGravity(Gravity.LEFT)
+//            show()
+//        }
     }
 
     fun loadAdapter() {
+        if (currentValue.isEmpty()) currentValue = item.first().text
+        textView.text = currentValue
         listPopupWindow.setAdapter(null)
         listPopupWindow.setAdapter(object : BaseAdapter() {
             override fun getCount(): Int {
@@ -138,6 +168,7 @@ class WineSpinner(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : L
                     }
                     setOnClickListener {
                         currentValue = spinnerData.text
+                        textView.text = currentValue
                         spinnerData.click?.invoke(position)
                         listPopupWindow.dismiss()
                     }

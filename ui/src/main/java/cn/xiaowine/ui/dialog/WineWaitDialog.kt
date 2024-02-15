@@ -63,7 +63,7 @@ class WineWaitDialog(context: Context) : Dialog(context, R.style.Theme_WineDialo
                 height = 25.dp
             }
             val rotateDrawable = RotateDrawable().apply {
-                drawable = ContextCompat.getDrawable(context, R.drawable.progress_icon)
+                drawable = ContextCompat.getDrawable(context, R.drawable.ic_progress)
                 fromDegrees = 0f
                 toDegrees = 1080f
                 pivotX = 0.5f

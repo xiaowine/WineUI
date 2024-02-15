@@ -14,7 +14,6 @@ class WineSwitch(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Ba
     val switchView = HyperSwitch(context).apply {
         gravity = Gravity.CENTER_VERTICAL
         id = View.generateViewId()
-        layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
     }
 
     var isChecked: Boolean

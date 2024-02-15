@@ -7,6 +7,7 @@ import cn.xiaowine.ui.appcompat.HyperEditText
 import cn.xiaowine.ui.widget.WineCard
 import cn.xiaowine.ui.widget.WineLine
 import cn.xiaowine.ui.widget.WineSeekBar
+import cn.xiaowine.ui.widget.WineSpinner
 import cn.xiaowine.ui.widget.WineSwitch
 import cn.xiaowine.ui.widget.WineText
 import cn.xiaowine.ui.widget.WineTitle
@@ -64,6 +65,11 @@ class PageBuild {
     fun edittext(init: HyperEditText.() -> Unit) {
         viewList.add(Pair(HyperEditText::class.java) { init.invoke(this as HyperEditText) })
     }
+
+    fun spinner(init: WineSpinner.() -> Unit) {
+        viewList.add(Pair(WineSpinner::class.java) { init.invoke(this as WineSpinner) })
+    }
+
     //
 //    fun <T : View> custom(view: View, init: T.() -> Unit) {
 //        viewList.add(Pair(view::class.java) { init.invoke(this as T) })

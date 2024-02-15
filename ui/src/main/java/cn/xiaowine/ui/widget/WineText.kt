@@ -15,7 +15,6 @@ class WineText(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Base
     val arrowImage = ImageView(context).apply {
         id = View.generateViewId()
         setImageResource(R.drawable.ic_right_arrow)
-        layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
         setImageResource(R.drawable.ic_right_arrow)
         visibility = View.GONE
     }

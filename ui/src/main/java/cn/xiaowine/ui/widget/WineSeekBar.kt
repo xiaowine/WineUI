@@ -5,6 +5,7 @@ import android.graphics.Typeface
 import android.os.Build
 import android.util.AttributeSet
 import android.util.TypedValue
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import android.widget.LinearLayout
@@ -12,11 +13,11 @@ import android.widget.SeekBar
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import cn.xiaowine.ui.appcompat.HyperSeekBar
+import cn.xiaowine.ui.databinding.WineSeekBinding
 import cn.xiaowine.ui.tools.Tools.dp2px
 import cn.xiaowine.ui.tools.Tools.hideView
 import cn.xiaowine.ui.tools.Tools.showView
-import cn.xiaowine.ui.appcompat.HyperSeekBar
-import cn.xiaowine.ui.databinding.WineSeekBinding
 import kotlin.properties.Delegates
 
 
@@ -28,23 +29,46 @@ class WineSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : C
     private var _binding: WineSeekBinding? = null
     private val binding: WineSeekBinding get() = _binding!!
 
+    val minText: AppCompatTextView get() = binding.minText
+    val maxText: AppCompatTextView get() = binding.maxText
+    val nowText: AppCompatTextView get() = binding.nowText
+    val seekBar: HyperSeekBar get() = binding.seekBar
+    val textLayout: LinearLayout get() = binding.textLayout
+    private val constraintLayout: ConstraintLayout get() = binding.constraintLayout
+    private val fragment: FrameLayout get() = binding.fragment
+
+
     //    Android 8.1以上才支持设置最小值
     var minProgress by Delegates.observable(0) { _, _, newValue ->
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (newValue < -9999) {
+                error("The minimum value cannot be less than -9999")
+            }
             minText.text = newValue.toString()
             seekBar.min = newValue
         }
     }
+
+    //    最大值9999
     var maxProgress by Delegates.observable(0) { _, _, newValue ->
+        if (newValue > 9999) {
+            error("The maximum value cannot exceed 9999")
+        }
         maxText.text = newValue.toString()
         seekBar.max = newValue
     }
+
     var nowProgress by Delegates.observable(0) { _, _, newValue ->
         post {
             nowText.text = newValue.toString()
-        }
-        post {
             seekBar.progress = newValue
+        }
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        if (nowProgress !in minProgress..maxProgress) {
+            error("The current value cannot exceed the maximum value or be less than the minimum value")
         }
     }
 
@@ -57,10 +81,11 @@ class WineSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : C
                 layoutParams = LinearLayout.LayoutParams(0, dp2px(context, 31f), 1f)
             } else {
                 setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
-                setPadding(dp2px(context, 12f), 0, 0, 0)
+                setPadding(dp2px(context, 10f), 0, 0, 0)
                 layoutParams.apply {
-                    width = dp2px(context, 50f)
+                    width = dp2px(context, 55f * resources.configuration.fontScale + 5)
                 }
+                gravity = Gravity.CENTER_VERTICAL or Gravity.END
                 typeface = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                     Typeface.create(Typeface.DEFAULT, 600, false)
                 } else {
@@ -69,14 +94,6 @@ class WineSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : C
             }
         }
     }
-
-    val minText: AppCompatTextView get() = binding.minText
-    val maxText: AppCompatTextView get() = binding.maxText
-    val nowText: AppCompatTextView get() = binding.nowText
-    val seekBar: HyperSeekBar get() = binding.seekBar
-    val textLayout: LinearLayout get() = binding.textLayout
-    private val constraintLayout: ConstraintLayout get() = binding.constraintLayout
-    private val fragment: FrameLayout get() = binding.fragment
 
 
     init {
@@ -120,6 +137,10 @@ class WineSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : C
                 onLongClick?.invoke(seekBar, progress)
             }
         })
+        nowText.setOnLongClickListener {
+            onLongClick?.invoke(seekBar, seekBar.progress)
+            true
+        }
     }
 
     interface ProgressChangedListener {

@@ -34,6 +34,7 @@ class HyperButton(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : A
         val defaultDrawable = createRoundShape(dp2px(context, 18f).toFloat(), ContextCompat.getColor(context, R.color.button_default_color))
         val pressedDrawable = createRoundShape(dp2px(context, 18f).toFloat(), ContextCompat.getColor(context, R.color.button_pressed_color))
         val disabledDrawable = createRoundShape(dp2px(context, 18f).toFloat(), ContextCompat.getColor(context, R.color.button_disable_color))
+        setPadding(0, 0, 0, 0)
         background = StateListDrawable().apply {
             addState(intArrayOf(-android.R.attr.state_enabled), disabledDrawable)
             addState(intArrayOf(android.R.attr.state_pressed), pressedDrawable)

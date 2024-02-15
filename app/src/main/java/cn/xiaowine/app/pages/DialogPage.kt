@@ -2,10 +2,10 @@ package cn.xiaowine.app.pages
 
 import android.annotation.SuppressLint
 import android.widget.Toast
+import cn.xiaowine.ui.WinePage
 import cn.xiaowine.ui.dialog.WineDialog
 import cn.xiaowine.ui.dialog.WineEditTextDialog
 import cn.xiaowine.ui.dialog.WineWaitDialog
-import cn.xiaowine.ui.WinePage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -96,6 +96,7 @@ class DialogPage : WinePage() {
                     WineEditTextDialog(context).apply {
                         setTitle("标题")
                         setMessage("这是一个消息")
+                        setHint("请输入")
                         addButton("确定") {
                             Toast.makeText(context, "确定", Toast.LENGTH_SHORT).show()
                             dismiss()

@@ -5,11 +5,11 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.SwitchCompat
 import cn.xiaowine.ui.R
-import cn.xiaowine.ui.tools.Tools.dp2px
+import cn.xiaowine.ui.tools.Tools.dp
 import java.lang.reflect.Field
 
 class HyperSwitch(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : SwitchCompat(context, attrs, defStyleAttr) {
-    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs,  androidx.appcompat.R.attr.switchStyle)
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, androidx.appcompat.R.attr.switchStyle)
     constructor(context: Context) : this(context, null)
 
 
@@ -25,7 +25,7 @@ class HyperSwitch(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : S
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         val mSwitchWidth: Field = SwitchCompat::class.java.getDeclaredField("mSwitchWidth")
         mSwitchWidth.isAccessible = true
-        mSwitchWidth.setInt(this, dp2px(context, 56f))
+        mSwitchWidth.setInt(this, 56.dp)
     }
 
 }

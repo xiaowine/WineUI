@@ -18,9 +18,8 @@ import android.widget.SeekBar
 import androidx.appcompat.widget.AppCompatSeekBar
 import androidx.core.content.ContextCompat
 import cn.xiaowine.ui.R
-import cn.xiaowine.ui.tools.Tools
+import cn.xiaowine.ui.tools.Tools.dp
 import kotlin.math.abs
-
 
 class HyperSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : AppCompatSeekBar(context, attrs, defStyleAttr) {
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, androidx.appcompat.R.attr.seekBarStyle)
@@ -66,10 +65,10 @@ class HyperSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : 
         thumb = null
         background = null
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            maxHeight = Tools.dp2px(context, 31f)
-            minHeight = Tools.dp2px(context, 31f)
+            maxHeight = 31.dp
+            minHeight = 31.dp
         } else {
-            layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Tools.dp2px(context, 31f))
+            layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 31.dp)
         }
         setPadding(0, 0, 0, 0)
     }

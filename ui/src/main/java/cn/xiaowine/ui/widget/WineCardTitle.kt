@@ -7,7 +7,7 @@ import android.widget.FrameLayout
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import cn.xiaowine.ui.R
-import cn.xiaowine.ui.tools.Tools.dp2px
+import cn.xiaowine.ui.tools.Tools.dp
 
 class WineCardTitle(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : AppCompatTextView(context, attrs, defStyleAttr) {
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, android.R.attr.textViewStyle)
@@ -15,10 +15,10 @@ class WineCardTitle(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
 
     init {
         layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT).apply {
-            setMargins(0, dp2px(context, 10f), 0, dp2px(context, 10f))
+            setMargins(0, 10.dp, 0, 10.dp)
         }
-        setTextColor(ContextCompat.getColor(context,R.color.card_title_color))
         setTextColor(ContextCompat.getColor(context, R.color.card_title_color))
-        setTextSize(TypedValue.COMPLEX_UNIT_SP, 18.6f)
+        setTextColor(ContextCompat.getColor(context, R.color.card_title_color))
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
     }
 }

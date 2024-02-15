@@ -16,7 +16,7 @@ import cn.xiaowine.ui.build.PageBuild
 import cn.xiaowine.ui.data.PageData
 import cn.xiaowine.ui.data.TogglePageDate
 import cn.xiaowine.ui.databinding.FragmentPageBinding
-import cn.xiaowine.ui.tools.Tools.dp2px
+import cn.xiaowine.ui.tools.Tools.dp
 import cn.xiaowine.ui.viewmodel.PageViewModel
 import cn.xiaowine.ui.widget.WineCard
 import kotlinx.coroutines.CoroutineScope
@@ -77,7 +77,7 @@ open class WinePage : Fragment() {
                     addView(view.apply {
                         it.second.invoke(this)
                         if (this::class.java.name != WineCard::class.java.name) {
-                            setPadding(dp2px(context, 28f), 0, dp2px(context, 28f), 0)
+                            setPadding(28.dp, 0, 28.dp, 0)
                         }
                         findViewById<TextView>(R.id.summary_view)?.let { summaryView ->
                             if (summaryView.text.isEmpty()) {
@@ -86,11 +86,11 @@ open class WinePage : Fragment() {
                         }
                     })
                 }
-                setPadding(0, 0, 0, dp2px(context, 30f))
+                setPadding(0, 0, 0, 30.dp)
             }
             collapsingToolbarLayout.apply {
-                expandedTitleTextSize = dp2px(context, 30f).toFloat()
-                collapsedTitleTextSize = dp2px(context, 20f).toFloat()
+                expandedTitleTextSize = 30.dp.toFloat()
+                collapsedTitleTextSize = 20.dp.toFloat()
                 setCollapsedTitleTypeface(
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                         Typeface.create(null, 400, false)

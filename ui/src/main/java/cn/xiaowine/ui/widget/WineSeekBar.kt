@@ -15,7 +15,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import cn.xiaowine.ui.appcompat.HyperSeekBar
 import cn.xiaowine.ui.databinding.WineSeekBinding
-import cn.xiaowine.ui.tools.Tools.dp2px
+import cn.xiaowine.ui.tools.Tools.dp
 import cn.xiaowine.ui.tools.Tools.hideView
 import cn.xiaowine.ui.tools.Tools.showView
 import kotlin.properties.Delegates
@@ -77,13 +77,13 @@ class WineSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : C
             this.text = text.toString()
             if (layoutParams is LinearLayout.LayoutParams) {
                 setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
-                setPadding(dp2px(context, 20f), 0, dp2px(context, 20f), 0)
-                layoutParams = LinearLayout.LayoutParams(0, dp2px(context, 31f), 1f)
+                setPadding(20.dp, 0, 20.dp, 0)
+                layoutParams = LinearLayout.LayoutParams(0, 31.dp, 1f)
             } else {
                 setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
-                setPadding(dp2px(context, 10f), 0, 0, 0)
+                setPadding(10.dp, 0, 0, 0)
                 layoutParams.apply {
-                    width = dp2px(context, 55f * resources.configuration.fontScale + 5)
+                    width = (55 * resources.configuration.fontScale.toInt() + 5).dp
                 }
                 gravity = Gravity.CENTER_VERTICAL or Gravity.END
                 typeface = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
@@ -100,8 +100,8 @@ class WineSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : C
         _binding = WineSeekBinding.inflate(LayoutInflater.from(context), this, true)
         ConstraintSet().apply {
             clone(constraintLayout)
-            connect(fragment.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, dp2px(context, 15f))
-            connect(fragment.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, dp2px(context, 15f))
+            connect(fragment.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 15.dp)
+            connect(fragment.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 15.dp)
             applyTo(constraintLayout)
         }
         minText.createTextView(minProgress)

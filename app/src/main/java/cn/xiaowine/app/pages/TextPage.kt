@@ -2,8 +2,8 @@ package cn.xiaowine.app.pages
 
 import android.annotation.SuppressLint
 import cn.xiaowine.app.R
-import cn.xiaowine.ui.annotation.Coroutine
 import cn.xiaowine.ui.WinePage
+import cn.xiaowine.ui.annotation.Coroutine
 
 @SuppressLint("SetTextI18n")
 @Coroutine

@@ -11,8 +11,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import cn.xiaowine.ui.R
 import cn.xiaowine.ui.tools.Tools.createRoundShape
-import cn.xiaowine.ui.tools.Tools.dp2px
-
+import cn.xiaowine.ui.tools.Tools.dp
 
 class HyperButton(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : AppCompatButton(context, attrs, defStyleAttr) {
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, androidx.appcompat.R.attr.buttonStyle)
@@ -27,13 +26,13 @@ class HyperButton(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : A
         setTextSize(TypedValue.COMPLEX_UNIT_SP, 17.5f)
         stateListAnimator = null
         setDefaultBackground()
-        layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp2px(context, 51f), 1f)
+        layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 51.dp, 1f)
     }
 
     private fun setDefaultBackground() {
-        val defaultDrawable = createRoundShape(dp2px(context, 18f).toFloat(), ContextCompat.getColor(context, R.color.button_default_color))
-        val pressedDrawable = createRoundShape(dp2px(context, 18f).toFloat(), ContextCompat.getColor(context, R.color.button_pressed_color))
-        val disabledDrawable = createRoundShape(dp2px(context, 18f).toFloat(), ContextCompat.getColor(context, R.color.button_disable_color))
+        val defaultDrawable = createRoundShape(18f.dp, ContextCompat.getColor(context, R.color.button_default_color))
+        val pressedDrawable = createRoundShape(18f.dp, ContextCompat.getColor(context, R.color.button_pressed_color))
+        val disabledDrawable = createRoundShape(18f.dp, ContextCompat.getColor(context, R.color.button_disable_color))
         setPadding(0, 0, 0, 0)
         background = StateListDrawable().apply {
             addState(intArrayOf(-android.R.attr.state_enabled), disabledDrawable)
@@ -56,9 +55,9 @@ class HyperButton(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : A
         if (cancel) {
             setTextColor(ContextCompat.getColor(context, R.color.button_cancel_text_color))
             background = StateListDrawable().apply {
-                addState(intArrayOf(-android.R.attr.state_enabled), createRoundShape(dp2px(context, 18f).toFloat(), ContextCompat.getColor(context, R.color.button_cancel_disable_color)))
-                addState(intArrayOf(android.R.attr.state_pressed), createRoundShape(dp2px(context, 18f).toFloat(), ContextCompat.getColor(context, R.color.button_cancel_pressed_color)))
-                addState(intArrayOf(), createRoundShape(dp2px(context, 18f).toFloat(), ContextCompat.getColor(context, R.color.button_cancel_color)))
+                addState(intArrayOf(-android.R.attr.state_enabled), createRoundShape(18f.dp, ContextCompat.getColor(context, R.color.button_cancel_disable_color)))
+                addState(intArrayOf(android.R.attr.state_pressed), createRoundShape(18f.dp, ContextCompat.getColor(context, R.color.button_cancel_pressed_color)))
+                addState(intArrayOf(), createRoundShape(18f.dp, ContextCompat.getColor(context, R.color.button_cancel_color)))
             }
         } else {
             setTextColor(ContextCompat.getColor(context, R.color.button_text_color))

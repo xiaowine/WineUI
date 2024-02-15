@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.widget.LinearLayout
 import android.widget.Toast
 import cn.xiaowine.ui.WinePage
-import cn.xiaowine.ui.tools.Tools
+import cn.xiaowine.ui.tools.Tools.dp
 
 @SuppressLint("SetTextI18n")
 class ButtonPage : WinePage() {
@@ -13,7 +13,7 @@ class ButtonPage : WinePage() {
         initPage {
             toPageText()
             title {
-                text = "SeekBar"
+                text = "Button"
             }
             button {
                 text = "Click me"
@@ -21,7 +21,7 @@ class ButtonPage : WinePage() {
                     Toast.makeText(context, "Hello", Toast.LENGTH_SHORT).show()
                 }
                 (layoutParams as LinearLayout.LayoutParams).apply {
-                    setMargins(Tools.dp2px(context, 30f), Tools.dp2px(context, 10f), Tools.dp2px(context, 30f), Tools.dp2px(context, 10f))
+                    setMargins(30.dp, 10.dp, 30.dp, 10.dp)
                 }
             }
             button {
@@ -30,7 +30,7 @@ class ButtonPage : WinePage() {
                     Toast.makeText(context, "Hello", Toast.LENGTH_SHORT).show()
                 }
                 (layoutParams as LinearLayout.LayoutParams).apply {
-                    setMargins(Tools.dp2px(context, 30f), Tools.dp2px(context, 10f), Tools.dp2px(context, 30f), Tools.dp2px(context, 10f))
+                    setMargins(30.dp, 10.dp, 30.dp, 10.dp)
                 }
                 isEnabled = false
             }
@@ -40,7 +40,7 @@ class ButtonPage : WinePage() {
                     Toast.makeText(context, "Hello", Toast.LENGTH_SHORT).show()
                 }
                 (layoutParams as LinearLayout.LayoutParams).apply {
-                    setMargins(Tools.dp2px(context, 30f), Tools.dp2px(context, 10f), Tools.dp2px(context, 30f), Tools.dp2px(context, 10f))
+                    setMargins(30.dp, 10.dp, 30.dp, 10.dp)
                 }
                 setCancel(true)
             }

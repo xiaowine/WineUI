@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.SpannableStringBuilder
 import android.view.MotionEvent
+import android.widget.LinearLayout
 import cn.xiaowine.ui.appcompat.HyperEditText
 import cn.xiaowine.ui.data.HyperEditBackgroundStyle
 import cn.xiaowine.ui.tools.HyperEditTextFocusTools.touchIfNeedHideKeyboard
+import cn.xiaowine.ui.tools.Tools.dp
 
 class WineEditTextDialog(context: Context) : WineDialog(context) {
 
@@ -15,7 +17,11 @@ class WineEditTextDialog(context: Context) : WineDialog(context) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        addCustomizeView(editText)
+        addCustomizeView(editText.apply {
+            (layoutParams as LinearLayout.LayoutParams).apply {
+                setMargins(25.dp, 0, 25.dp, 0)
+            }
+        })
     }
 
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
@@ -30,5 +36,9 @@ class WineEditTextDialog(context: Context) : WineDialog(context) {
 
     fun getValue(): Editable {
         return editText.text ?: SpannableStringBuilder("")
+    }
+
+    fun setHint(hint: String) {
+        editText.hint = hint
     }
 }

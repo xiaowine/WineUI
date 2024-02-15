@@ -12,7 +12,6 @@ import android.graphics.RectF
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
 
-
 class WineRoundImageView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : AppCompatImageView(context, attrs, defStyleAttr) {
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context) : this(context, null)
@@ -50,10 +49,7 @@ class WineRoundImageView(context: Context, attrs: AttributeSet?, defStyleAttr: I
             lineTo(roundWidth.toFloat(), 0f)
             arcTo(
                 RectF(
-                    0f,
-                    0f,
-                    (roundWidth * 2).toFloat(),
-                    (roundHeight * 2).toFloat()
+                    0f, 0f, (roundWidth * 2).toFloat(), (roundHeight * 2).toFloat()
                 ), -90f, -90f
             )
             close()
@@ -67,10 +63,7 @@ class WineRoundImageView(context: Context, attrs: AttributeSet?, defStyleAttr: I
             lineTo(roundWidth.toFloat(), height.toFloat())
             arcTo(
                 RectF(
-                    0f,
-                    (height - roundHeight * 2).toFloat(),
-                    (0 + roundWidth * 2).toFloat(),
-                    height.toFloat()
+                    0f, (height - roundHeight * 2).toFloat(), (0 + roundWidth * 2).toFloat(), height.toFloat()
                 ), 90f, 90f
             )
             close()
@@ -84,10 +77,7 @@ class WineRoundImageView(context: Context, attrs: AttributeSet?, defStyleAttr: I
             lineTo(width.toFloat(), (height - roundHeight).toFloat())
             arcTo(
                 RectF(
-                    (width - roundWidth * 2).toFloat(),
-                    (height - roundHeight * 2).toFloat(),
-                    width.toFloat(),
-                    height.toFloat()
+                    (width - roundWidth * 2).toFloat(), (height - roundHeight * 2).toFloat(), width.toFloat(), height.toFloat()
                 ), 0f, 90f
             )
             close()
@@ -101,10 +91,7 @@ class WineRoundImageView(context: Context, attrs: AttributeSet?, defStyleAttr: I
             lineTo((width - roundWidth).toFloat(), 0f)
             arcTo(
                 RectF(
-                    (width - roundWidth * 2).toFloat(),
-                    0f,
-                    width.toFloat(),
-                    (0 + roundHeight * 2).toFloat()
+                    (width - roundWidth * 2).toFloat(), 0f, width.toFloat(), (0 + roundHeight * 2).toFloat()
                 ), -90f, 90f
             )
             close()

@@ -1,6 +1,5 @@
 package cn.xiaowine.ui.widget
 
-
 import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
@@ -16,8 +15,7 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import cn.xiaowine.ui.R
 import cn.xiaowine.ui.databinding.WineTextBinding
-import cn.xiaowine.ui.tools.Tools.dp2px
-
+import cn.xiaowine.ui.tools.Tools.dp
 
 class WineText(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : ConstraintLayout(context, attrs, defStyleAttr) {
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -73,7 +71,7 @@ class WineText(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Cons
         if (drawable != null) {
             ConstraintSet().apply {
                 clone(constraintLayout)
-                connect(linearLayout.id, ConstraintSet.START, iconView.id, ConstraintSet.END, dp2px(context, 60f))
+                connect(linearLayout.id, ConstraintSet.START, iconView.id, ConstraintSet.END, 60.dp)
                 applyTo(constraintLayout)
             }
         }
@@ -99,15 +97,15 @@ class WineText(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Cons
             setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
         }
         iconView.apply {
-            layoutParams = LayoutParams(dp2px(context, 45f), dp2px(context, 45f))
+            layoutParams = LayoutParams(45.dp, 45.dp)
         }
         arrowImage.apply {
             setImageResource(R.drawable.ic_right_arrow)
         }
-        linearLayout.setPadding(0, dp2px(context, 20f), 0, dp2px(context, 20f))
+        linearLayout.setPadding(0, 20.dp, 0, 20.dp)
         ConstraintSet().apply {
             clone(constraintLayout)
-            connect(linearLayout.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, dp2px(context, 20f))
+            connect(linearLayout.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 20.dp)
             connect(arrowImage.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0)
             connect(iconView.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
             connect(iconView.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)

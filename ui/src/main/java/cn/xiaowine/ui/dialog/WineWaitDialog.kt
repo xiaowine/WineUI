@@ -13,8 +13,9 @@ import androidx.annotation.StringRes
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import cn.xiaowine.ui.R
-import cn.xiaowine.ui.tools.Tools
 import cn.xiaowine.ui.databinding.WineDialogProgressbarBinding
+import cn.xiaowine.ui.tools.Tools
+import cn.xiaowine.ui.tools.Tools.dp
 
 class WineWaitDialog(context: Context) : Dialog(context, R.style.Theme_WineDialog) {
 
@@ -41,24 +42,24 @@ class WineWaitDialog(context: Context) : Dialog(context, R.style.Theme_WineDialo
                 setWindowAnimations(R.style.Theme_WineDialogPadAnim)
             } else {
                 setGravity(Gravity.BOTTOM)
-                attributes.y = Tools.dp2px(context, 15f)
+                attributes.y = 15.dp
                 setWindowAnimations(R.style.Theme_WineDialogAnim)
             }
-            setBackgroundDrawable(Tools.createRoundShape(Tools.dp2px(context, 30f).toFloat(), ContextCompat.getColor(context, R.color.dialog_background_color)))
+            setBackgroundDrawable(Tools.createRoundShape(30f.dp, ContextCompat.getColor(context, R.color.dialog_background_color)))
             attributes.apply {
                 dimAmount = 0.5F
-                width = Tools.dp2px(context, 380f)
-                height = Tools.dp2px(context, 78f)
+                width = 380.dp
+                height = 78.dp
             }
         }
         titleView.apply {
             setTextSize(TypedValue.COMPLEX_UNIT_SP, 17f)
-            setPadding(Tools.dp2px(context, 10f), 0, 0, 0)
+            setPadding(10.dp, 0, 0, 0)
         }
         progressBar.apply {
             layoutParams.apply {
-                width = Tools.dp2px(context, 25f)
-                height = Tools.dp2px(context, 25f)
+                width = 25.dp
+                height = 25.dp
             }
             val rotateDrawable = RotateDrawable().apply {
                 drawable = ContextCompat.getDrawable(context, R.drawable.progress_icon)
@@ -67,16 +68,17 @@ class WineWaitDialog(context: Context) : Dialog(context, R.style.Theme_WineDialo
                 pivotX = 0.5f
                 pivotY = 0.5f
             }
-            indeterminateDrawable =  LayerDrawable(arrayOf(rotateDrawable))
+            indeterminateDrawable = LayerDrawable(arrayOf(rotateDrawable))
         }
         binding.root.apply {
-            setPadding(Tools.dp2px(context, 32f), 0, 0, 0)
+            setPadding(32.dp, 0, 0, 0)
         }
     }
 
     fun setTitle(title: String) {
         titleView.text = title
     }
+
     override fun setTitle(@StringRes title: Int) {
         titleView.setText(title)
     }

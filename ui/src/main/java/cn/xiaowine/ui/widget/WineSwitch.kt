@@ -14,9 +14,9 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
-import cn.xiaowine.ui.tools.Tools.dp2px
 import cn.xiaowine.ui.appcompat.HyperSwitch
 import cn.xiaowine.ui.databinding.WineSwitchBinding
+import cn.xiaowine.ui.tools.Tools.dp
 
 class WineSwitch(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : ConstraintLayout(context, attrs, defStyleAttr) {
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -79,7 +79,7 @@ class WineSwitch(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Co
         if (drawable != null) {
             ConstraintSet().apply {
                 clone(constraintLayout)
-                connect(linearLayout.id, ConstraintSet.START, iconView.id, ConstraintSet.END, dp2px(context, 60f))
+                connect(linearLayout.id, ConstraintSet.START, iconView.id, ConstraintSet.END, 60.dp)
                 applyTo(constraintLayout)
             }
         }
@@ -103,12 +103,12 @@ class WineSwitch(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Co
             setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
         }
         iconView.apply {
-            layoutParams = LayoutParams(dp2px(context, 45f), dp2px(context, 45f))
+            layoutParams = LayoutParams(45.dp, 45.dp)
         }
         switchView.apply {
             gravity = Gravity.CENTER_VERTICAL
         }
-        linearLayout.setPadding(0, dp2px(context, 20f), 0, dp2px(context, 20f))
+        linearLayout.setPadding(0, 20.dp, 0, 20.dp)
         ConstraintSet().apply {
             clone(constraintLayout)
             connect(switchView.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0)

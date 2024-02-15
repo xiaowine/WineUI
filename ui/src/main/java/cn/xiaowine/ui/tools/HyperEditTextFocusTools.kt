@@ -15,8 +15,7 @@ object HyperEditTextFocusTools {
             val top = l[1]
             val bottom = top + v.getHeight()
             val right = left + v.getWidth()
-            return (!(event.x > left) || !(event.x < right)
-                    || !(event.y > top) || !(event.y < bottom))
+            return (!(event.x > left) || !(event.x < right) || !(event.y > top) || !(event.y < bottom))
         }
         return false
     }
@@ -24,7 +23,7 @@ object HyperEditTextFocusTools {
     fun hideKeyboardAndClearFocus(context: Context, editText: HyperEditText) {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(editText.windowToken, 0)
-        editText.clearFocus()
+        editText.cancelAnimation()
     }
 
     fun Context.touchIfNeedHideKeyboard(currentFocus: View?, event: MotionEvent, default: () -> Boolean): Boolean {

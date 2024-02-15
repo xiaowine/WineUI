@@ -6,9 +6,9 @@
     <color name="color_track_color">#e6e6e6</color>
     <color name="line_color">#E6E6E6</color>
     <color name="title_color">#9399b3</color>
-    <color name="card_title_color">#9399b3</color>
+    <color name="card_title_color">#909090</color>
     <color name="card_link_color">#0d84ff</color>
-    <color name="card_bg_color">#EDEDED</color>
+    <color name="card_bg_color">#f0f0f0</color>
     <color name="seekbar_bg_color">#e6e6e6</color>
     <color name="seekbar_color">#0c84FF</color>
     <color name="dialog_background_color">@android:color/white</color>
@@ -24,5 +24,5 @@
     <color name="button_cancel_text_color">#303030</color>
     <color name="progress_color">#000000</color>
     <color name="dialog_edit_background_color">#f4f4f4</color>
-    <color name="edittext_hit_color">#5C5C5C</color>
+    <color name="edittext_hit_color">#a8a8a8</color>
 </resources>

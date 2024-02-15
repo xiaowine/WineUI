@@ -1,5 +1,3 @@
-import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.include
-
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
@@ -34,7 +32,6 @@ android {
 
 dependencies {
 //    implementation(libs.core.ktx)
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0-rc01")
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(project(mapOf("path" to ":ui")))

@@ -87,7 +87,7 @@ open class WineActivity : AppCompatActivity() {
         }
         pageItems.addAll(allPageData)
         if (pageViewModel.nowPage.value == null) {
-            val home = pageItems.singleOrNull { it.isHome } ?: error("No home page")
+            val home = pageItems.singleOrNull { it.isHome } ?: error("No Found single home page")
             pageViewModel.nowPage.postValue(TogglePageDate(home.page, null))
         }
     }

@@ -84,22 +84,25 @@ dependencies {
 ### 4. 继承WineActivity，并注册Page
 
 ```kotlin
-// 1.继承WineActivity
-// 2.注册页面registerPage
-// 3.注册页面的时候，PageData参数可以设置isHome为true，表示这个页面是首页
-// 首页在tabbar不会有返回按钮，其余页面都会有返回按钮
+// 1.继承 WineActivity
+// 2.注册页面 registerPage
+// 3.注册页面的时候, PageData 应设置 isHome 参数为 true, 表示这个页面是首页
+// 4.首页的 TabBar 上不会有返回按钮, 其余页面的 TabBar 上都会有返回按钮
 class DemoActivity : WineActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        registerPage(
-            PageData(MainPage::class.java, isHome = true),
-            PageData(TextPage::class.java),
-            PageData(SwitchPage::class.java)
-        )
-//        或通过扫描包名注册页面（全部按照默认配置生成界面），两种方式可以混用，后注册的覆盖先注册的
-//        使用扫描包名注册页面，需要在在混淆规则中添加规则暴露包名下的所有类
-        registerPage("cn.xiaowine.app.pages", MainPage::class.java)
-    }
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    // 注册页面，两种方式可以混用，后注册的覆盖先注册的
+
+    // 或通过手动添加注册页面
+    registerPage(
+      PageData(MainPage::class.java, isHome = true),
+      PageData(TextPage::class.java),
+      PageData(SwitchPage::class.java),
+    )
+
+    // 或通过扫描包名注册页面（全部按照默认配置生成界面）
+    registerPage("cn.xiaowine.app.pages", MainPage::class.java)
+  }
 }
 ```
 
@@ -139,6 +142,7 @@ class MainPage : WinePage() {
 -keep class cn.xiaowine.ui.annotation.** { *; }
 -keep class cn.xiaowine.ui.data.** { *; }
 -keep class cn.xiaowine.ui.widget.**{ <init>(...);}
+-keep class cn.xiaowine.ui.appcompat.**{ <init>(...);}
 ```
 
 ## Star History

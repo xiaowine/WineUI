@@ -23,3 +23,4 @@
 -keep class cn.xiaowine.ui.annotation.** { *; }
 -keep class cn.xiaowine.ui.data.** { *; }
 -keep class cn.xiaowine.ui.widget.**{ <init>(...);}
+-keep class cn.xiaowine.ui.appcompat.**{ <init>(...);}

@@ -60,13 +60,6 @@ object Tools {
         startAnimation(alphaAnimation)
     }
 
-    fun createRoundShape(radius: Float, color: Int): ShapeDrawable {
-        val radii = floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius)
-        val roundRectShape = RoundRectShape(radii, null, null)
-        return ShapeDrawable(roundRectShape).apply {
-            paint.color = color
-        }
-    }
 
     fun getProp(name: String): String {
         var prop = getPropByShell(name)

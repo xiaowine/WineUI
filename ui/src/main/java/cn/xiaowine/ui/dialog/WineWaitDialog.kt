@@ -14,6 +14,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import cn.xiaowine.ui.R
 import cn.xiaowine.ui.databinding.WineDialogProgressbarBinding
+import cn.xiaowine.ui.tools.DrawableTools.createRoundShape
 import cn.xiaowine.ui.tools.Tools
 import cn.xiaowine.ui.tools.Tools.dp
 
@@ -45,7 +46,7 @@ class WineWaitDialog(context: Context) : Dialog(context, R.style.Theme_WineDialo
                 attributes.y = 15.dp
                 setWindowAnimations(R.style.Theme_WineDialogAnim)
             }
-            setBackgroundDrawable(Tools.createRoundShape(30f.dp, ContextCompat.getColor(context, R.color.dialog_background_color)))
+            setBackgroundDrawable(createRoundShape(30f.dp, ContextCompat.getColor(context, R.color.dialog_background_color)))
             attributes.apply {
                 dimAmount = 0.5F
                 width = 380.dp

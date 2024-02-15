@@ -10,7 +10,7 @@ import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import cn.xiaowine.ui.R
-import cn.xiaowine.ui.tools.Tools.createRoundShape
+import cn.xiaowine.ui.tools.DrawableTools.createRoundShape
 import cn.xiaowine.ui.tools.Tools.dp
 
 class HyperButton(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : AppCompatButton(context, attrs, defStyleAttr) {
@@ -26,6 +26,7 @@ class HyperButton(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : A
         setTextSize(TypedValue.COMPLEX_UNIT_SP, 17.5f)
         stateListAnimator = null
         setDefaultBackground()
+        setPadding(0, 0, 0, 0)
         layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 51.dp, 1f)
     }
 
@@ -33,7 +34,6 @@ class HyperButton(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : A
         val defaultDrawable = createRoundShape(18f.dp, ContextCompat.getColor(context, R.color.button_default_color))
         val pressedDrawable = createRoundShape(18f.dp, ContextCompat.getColor(context, R.color.button_pressed_color))
         val disabledDrawable = createRoundShape(18f.dp, ContextCompat.getColor(context, R.color.button_disable_color))
-        setPadding(0, 0, 0, 0)
         background = StateListDrawable().apply {
             addState(intArrayOf(-android.R.attr.state_enabled), disabledDrawable)
             addState(intArrayOf(android.R.attr.state_pressed), pressedDrawable)

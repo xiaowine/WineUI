@@ -6,6 +6,9 @@ import cn.xiaowine.ui.dialog.WineDialog
 import cn.xiaowine.ui.dialog.WineEditTextDialog
 import cn.xiaowine.ui.dialog.WineWaitDialog
 import cn.xiaowine.ui.WinePage
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @SuppressLint("SetTextI18n")
 class DialogPage : WinePage() {
@@ -73,12 +76,18 @@ class DialogPage : WinePage() {
                 }
             }
             text {
-                title = "Show WineProgressBar"
+                title = "Show WineWaitDialog"
                 onClick {
-                    WineWaitDialog(requireContext()).apply {
+                    val wineWaitDialog = WineWaitDialog(requireContext()).apply {
                         setTitle("标题")
                         show()
                     }
+                    Thread {
+                        Thread.sleep(3000)
+                        CoroutineScope(Dispatchers.Main).launch {
+                            wineWaitDialog.dismiss()
+                        }
+                    }.start()
                 }
             }
             text {

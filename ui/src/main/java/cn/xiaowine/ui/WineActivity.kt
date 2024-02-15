@@ -2,13 +2,19 @@ package cn.xiaowine.ui
 
 import android.os.Build
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import cn.xiaowine.ui.appcompat.HyperEditText
 import cn.xiaowine.ui.data.PageData
 import cn.xiaowine.ui.data.TogglePageDate
 import cn.xiaowine.ui.databinding.ActivityWineBinding
 import cn.xiaowine.ui.tools.ClassScanner.scanPages
+import cn.xiaowine.ui.tools.HyperEditTextFocusTools.hideKeyboardAndClearFocus
+import cn.xiaowine.ui.tools.HyperEditTextFocusTools.isShouldHideKeyboard
+import cn.xiaowine.ui.tools.HyperEditTextFocusTools.touchIfNeedHideKeyboard
 import cn.xiaowine.ui.viewmodel.PageViewModel
 
 
@@ -58,6 +64,19 @@ open class WineActivity : AppCompatActivity() {
         setupOnBackPressedCallback()
     }
 
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        return this.touchIfNeedHideKeyboard(currentFocus, ev) {
+            super.dispatchTouchEvent(ev)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val view = currentFocus
+        if (view is HyperEditText) {
+            hideKeyboardAndClearFocus(this, view)
+        }
+    }
 
     private fun setupOnBackPressedCallback() {
         val callback = object : OnBackPressedCallback(true) {

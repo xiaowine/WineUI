@@ -14,6 +14,7 @@
     <color name="dialog_background_color">@android:color/white</color>
     <color name="button_disable_text_color">@android:color/white</color>
     <color name="button_default_color">#0c84FF</color>
+    <color name="edittext_background_stroke">#0c84FF</color>
     <color name="button_disable_color">#C2D9FF</color>
     <color name="button_pressed_color">#0d7AEC</color>
     <color name="button_text_color">@android:color/white</color>

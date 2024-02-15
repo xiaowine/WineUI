@@ -3,10 +3,14 @@ package cn.xiaowine.app.pages
 import cn.xiaowine.ui.WinePage
 import cn.xiaowine.ui.dialog.WineWaitDialog
 
-// 1.继承WinePage
-// 2.初始化页面initPage
+// 1.继承 WinePage
+// 2.初始化页面 initPage
 
 class MainPage : WinePage() {
+
+    // 防止重复初始化
+    private var isPageInitialized = false
+
     init {
         initPage {
             title {
@@ -20,20 +24,22 @@ class MainPage : WinePage() {
 
     override fun onStart() {
         super.onStart()
-        val wineWaitDialog = WineWaitDialog(requireContext()).apply {
-            setTitle("加载中")
-            show()
-        }
-        initPage {
-            pageItems.forEach {
-                if (it.page == this@MainPage::class.java) {
-                    return@forEach
-                }
-                toPageText(page = it.page)
+        if (!isPageInitialized) {
+            val wineWaitDialog = WineWaitDialog(requireContext()).apply {
+                setTitle("加载中")
+                show()
             }
+            initPage {
+                isPageInitialized = true
+                pageItems.forEach {
+                    if (it.page == this@MainPage::class.java) {
+                        return@forEach
+                    }
+                    toPageText(page = it.page)
+                }
+            }
+            reloadPage()
+            wineWaitDialog.dismiss()
         }
-        reloadPage()
-        wineWaitDialog.dismiss()
-
     }
 }

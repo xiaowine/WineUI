@@ -6,6 +6,7 @@ import cn.xiaowine.ui.dialog.WineDialog
 import cn.xiaowine.ui.dialog.WineEditTextDialog
 import cn.xiaowine.ui.dialog.WineWaitDialog
 import cn.xiaowine.ui.WinePage
+
 @SuppressLint("SetTextI18n")
 class DialogPage : WinePage() {
 

@@ -11,12 +11,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import cn.xiaowine.ui.tools.Tools.dp2px
 import cn.xiaowine.ui.annotation.Coroutine
 import cn.xiaowine.ui.build.PageBuild
 import cn.xiaowine.ui.data.PageData
 import cn.xiaowine.ui.data.TogglePageDate
 import cn.xiaowine.ui.databinding.FragmentPageBinding
+import cn.xiaowine.ui.tools.Tools.dp2px
 import cn.xiaowine.ui.viewmodel.PageViewModel
 import cn.xiaowine.ui.widget.WineCard
 import kotlinx.coroutines.CoroutineScope

@@ -1,13 +1,16 @@
 package cn.xiaowine.ui.tools
 
 import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.view.MotionEvent
 import android.view.View
+import android.view.WindowInsets
 import android.view.inputmethod.InputMethodManager
 import cn.xiaowine.ui.appcompat.HyperEditText
 
 object HyperEditTextFocusTools {
-    fun isShouldHideKeyboard(v: View, event: MotionEvent): Boolean {
+
+    private fun isShouldHideKeyboard(v: View, event: MotionEvent): Boolean {
         if (v is HyperEditText) {
             val l = intArrayOf(0, 0)
             v.getLocationInWindow(l)
@@ -21,16 +24,24 @@ object HyperEditTextFocusTools {
     }
 
     fun hideKeyboardAndClearFocus(context: Context, editText: HyperEditText) {
-        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(editText.windowToken, 0)
-        editText.cancelAnimation()
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            editText.windowInsetsController?.hide(WindowInsets.Type.ime())
+        } else {
+            val imm = context.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(editText.windowToken, 0)
+        }
+        editText.apply {
+            cancelAnimation()
+            clearFocus()
+        }
     }
 
-    fun Context.touchIfNeedHideKeyboard(currentFocus: View?, event: MotionEvent, default: () -> Boolean): Boolean {
-        if (event.action == MotionEvent.ACTION_DOWN) {
+    fun Context.touchIfNeedHideKeyboard(currentFocus: View?, event: MotionEvent, isDialog: Boolean, default: () -> Boolean): Boolean {
+        if (event.action == MotionEvent.ACTION_UP) {
             val v = currentFocus ?: return default()
             if (isShouldHideKeyboard(v, event)) {
                 hideKeyboardAndClearFocus(this, v as HyperEditText)
+                if (isDialog) return false
             }
         }
         return default()

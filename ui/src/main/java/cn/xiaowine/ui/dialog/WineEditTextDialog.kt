@@ -25,7 +25,7 @@ class WineEditTextDialog(context: Context) : WineDialog(context) {
     }
 
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
-        return context.touchIfNeedHideKeyboard(currentFocus, event) {
+        return context.touchIfNeedHideKeyboard(currentFocus, event, true) {
             super.dispatchTouchEvent(event)
         }
     }

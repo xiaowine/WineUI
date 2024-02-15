@@ -3,7 +3,6 @@ package cn.xiaowine.ui
 import android.os.Build
 import android.os.Bundle
 import android.view.MotionEvent
-import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -13,7 +12,6 @@ import cn.xiaowine.ui.data.TogglePageDate
 import cn.xiaowine.ui.databinding.ActivityWineBinding
 import cn.xiaowine.ui.tools.ClassScanner.scanPages
 import cn.xiaowine.ui.tools.HyperEditTextFocusTools.hideKeyboardAndClearFocus
-import cn.xiaowine.ui.tools.HyperEditTextFocusTools.isShouldHideKeyboard
 import cn.xiaowine.ui.tools.HyperEditTextFocusTools.touchIfNeedHideKeyboard
 import cn.xiaowine.ui.viewmodel.PageViewModel
 
@@ -65,7 +63,7 @@ open class WineActivity : AppCompatActivity() {
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        return this.touchIfNeedHideKeyboard(currentFocus, ev) {
+        return this.touchIfNeedHideKeyboard(currentFocus, ev, false) {
             super.dispatchTouchEvent(ev)
         }
     }

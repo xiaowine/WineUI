@@ -18,6 +18,7 @@ import cn.xiaowine.ui.databinding.WineSeekBinding
 import cn.xiaowine.ui.tools.Tools.dp
 import cn.xiaowine.ui.tools.Tools.hideView
 import cn.xiaowine.ui.tools.Tools.showView
+import kotlin.math.roundToInt
 import kotlin.properties.Delegates
 
 
@@ -83,7 +84,7 @@ class WineSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : C
                 setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
                 setPadding(10.dp, 0, 0, 0)
                 layoutParams.apply {
-                    width = (55 * resources.configuration.fontScale.toInt() + 5).dp
+                    width = (55 * resources.configuration.fontScale + 5).dp.roundToInt()
                 }
                 gravity = Gravity.CENTER_VERTICAL or Gravity.END
                 typeface = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {

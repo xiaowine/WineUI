@@ -48,15 +48,15 @@ open class BaseWineText(context: Context, attrs: AttributeSet?, defStyleAttr: In
         }
 
 
-    open fun onClick(onClick: (() -> Unit)? = null) {
-        binding.root.setOnClickListener {
-            onClick?.invoke()
+    open fun onClick(onClick: ((BaseWineText) -> Unit)? = null) {
+        setOnClickListener {
+            onClick?.invoke(it as BaseWineText)
         }
     }
 
-    fun onLongClick(onLongClick: (() -> Unit)? = null) {
-        binding.root.setOnLongClickListener {
-            onLongClick?.invoke()
+    fun onLongClick(onLongClick: ((BaseWineText) -> Unit)? = null) {
+        setOnLongClickListener {
+            onLongClick?.invoke(it as BaseWineText)
             true
         }
     }

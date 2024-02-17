@@ -54,37 +54,21 @@ class WineSpinner(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : B
         background = ContextCompat.getDrawable(context, R.drawable.ic_spinner)
     }
 
-    @SuppressLint("ClickableViewAccessibility")
-    fun onClick(onClick: ((View, MotionEvent) -> Unit)? = null) {
-        binding.root.setOnTouchListener { v, event ->
-            onClick?.invoke(v, event)
-            true
-        }
-    }
-
     init {
-
         val linearLayout = LinearLayout(context).apply {
             gravity = Gravity.CENTER_VERTICAL
             addView(textView)
             addView(imageView)
         }
         addCustomizeView(linearLayout)
-        onClick { view, motionEvent ->
-            if (motionEvent.action == MotionEvent.ACTION_UP) {
+        setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
                 listPopupWindow.apply {
-                    if (view.width / 2 >= motionEvent.x) {
-                        horizontalOffset = 24.dp
-                        setDropDownGravity(Gravity.LEFT)
-                    } else {
-                        horizontalOffset = (-24).dp
-                        setDropDownGravity(Gravity.RIGHT)
-                    }
                     show()
                 }
             }
+            true
         }
-
     }
 
     fun setData(vararg data: SpinnerData) {
@@ -103,17 +87,11 @@ class WineSpinner(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : B
             loadAdapter()
         }
         super.onAttachedToWindow()
-//        listPopupWindow.apply {
-//            horizontalOffset = 24.dp
-//            setDropDownGravity(Gravity.LEFT)
-//            show()
-//        }
     }
 
     fun loadAdapter() {
         if (currentValue.isEmpty()) currentValue = item.first().text
         textView.text = currentValue
-        listPopupWindow.setAdapter(null)
         listPopupWindow.setAdapter(object : BaseAdapter() {
             override fun getCount(): Int {
                 return item.size

@@ -24,21 +24,13 @@ class WineSwitch(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Ba
             switchView.isChecked = value
         }
 
-    fun onClick(onClick: ((Boolean) -> Unit)?) {
+    fun onChange(onClick: ((HyperSwitch, Boolean) -> Unit)?) {
         switchView.setOnCheckedChangeListener { v, b ->
             if (v.isPressed) {
-                onClick?.invoke(b)
+                onClick?.invoke(v as HyperSwitch, b)
             }
         }
     }
-
-    fun onLongClick(onLongClick: ((Boolean) -> Unit)? = null) {
-        binding.root.setOnLongClickListener {
-            onLongClick?.invoke(switchView.isClickable)
-            true
-        }
-    }
-
 
     init {
         ConstraintSet().apply {

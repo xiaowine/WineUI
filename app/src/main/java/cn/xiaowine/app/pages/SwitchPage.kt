@@ -15,20 +15,17 @@ class SwitchPage : WinePage() {
             switch {
                 title = "开关"
                 isChecked = true
-                onClick { it ->
-                    Toast.makeText(context, "onClick value:$it", Toast.LENGTH_SHORT).show()
+                onChange { _, isChecked ->
+                    Toast.makeText(context, "onChange value:$isChecked", Toast.LENGTH_SHORT).show()
                 }
-                onLongClick { it ->
+                onLongClick {
                     Toast.makeText(context, "onLongClick value:$it", Toast.LENGTH_SHORT).show()
                 }
             }
             switch {
                 title = "开关"
-                onClick { it ->
-                    Toast.makeText(context, "onClick value:$it", Toast.LENGTH_SHORT).show()
-                }
-                onLongClick { it ->
-                    Toast.makeText(context, "onLongClick value:$it", Toast.LENGTH_SHORT).show()
+                onChange { _, isChecked ->
+                    Toast.makeText(context, "onChange value:$isChecked", Toast.LENGTH_SHORT).show()
                 }
                 setIcon(R.drawable.ic_launcher_background)
             }
@@ -36,22 +33,16 @@ class SwitchPage : WinePage() {
                 title = "带摘要的开关"
                 summary = "这是一个摘要"
                 isChecked = true
-                onClick { it ->
-                    Toast.makeText(context, "onClick value:$it", Toast.LENGTH_SHORT).show()
-                }
-                onLongClick { it ->
-                    Toast.makeText(context, "onLongClick value:$it", Toast.LENGTH_SHORT).show()
+                onChange { _, isChecked ->
+                    Toast.makeText(context, "onChange value:$isChecked", Toast.LENGTH_SHORT).show()
                 }
             }
             switch {
                 title = "带摘要带图标的开关"
                 summary = "这是一个摘要"
                 isChecked = false
-                onClick { it ->
-                    Toast.makeText(context, "onClick value:$it", Toast.LENGTH_SHORT).show()
-                }
-                onLongClick { it ->
-                    Toast.makeText(context, "onLongClick value:$it", Toast.LENGTH_SHORT).show()
+                onChange { _, isChecked ->
+                    Toast.makeText(context, "onChange value:$isChecked", Toast.LENGTH_SHORT).show()
                 }
                 setIcon(R.drawable.ic_launcher_background)
             }

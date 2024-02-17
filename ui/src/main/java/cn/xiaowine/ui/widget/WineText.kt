@@ -19,11 +19,9 @@ class WineText(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Base
         visibility = View.GONE
     }
 
-    override fun onClick(onClick: (() -> Unit)?) {
+    override fun onClick(onClick: ((BaseWineText) -> Unit)?) {
         haveArrow(onClick != null)
-        binding.root.setOnClickListener {
-            onClick?.invoke()
-        }
+        super.onClick(onClick)
     }
 
     fun haveArrow(boolean: Boolean = true) {

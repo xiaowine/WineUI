@@ -24,4 +24,9 @@
         <item name="android:windowEnterAnimation">@animator/dialog_enter</item>
         <item name="android:windowExitAnimation">@animator/dialog_exit</item>
     </style>
+
+    <style name="Theme.WinePopupAnim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/popup_enter</item>
+        <item name="android:windowExitAnimation">@anim/popup_exit</item>
+    </style>
 </resources>

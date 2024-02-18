@@ -25,4 +25,9 @@
     <color name="progress_color">#000000</color>
     <color name="dialog_edit_background_color">#f4f4f4</color>
     <color name="edittext_hit_color">#a8a8a8</color>
+    <color name="popup_background_color">#FFFFFF</color>
+    <color name="popup_background_click_color">#EBEBEB</color>
+    <color name="popup_select_background_color">#E6F2FF</color>
+    <color name="popup_select_background_click_color">#D4DFEB</color>
+    <color name="popup_select_text_color">#1385FF</color>
 </resources>

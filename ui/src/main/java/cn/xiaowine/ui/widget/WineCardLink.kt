@@ -29,22 +29,22 @@ class WineCardLink(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : 
         }
         setTextColor(ContextCompat.getColor(context, R.color.card_link_color))
         setTextSize(TypedValue.COMPLEX_UNIT_SP, 18.5f)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            typeface = Typeface.create(null, 500, false)
+        typeface = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            Typeface.create(null, 500, false)
         } else {
-           typeface = Typeface.defaultFromStyle(Typeface.BOLD)
+            Typeface.defaultFromStyle(Typeface.BOLD)
         }
     }
 
-    fun onClick(onClick: (() -> Unit)? = null) {
+    fun onClick(onClick: ((WineCardLink) -> Unit)? = null) {
         setOnClickListener {
-            onClick?.invoke()
+            onClick?.invoke(it as WineCardLink)
         }
     }
 
-    fun onLongClick(onLongClick: (() -> Unit)? = null) {
+    fun onLongClick(onLongClick: ((WineCardLink) -> Unit)? = null) {
         setOnLongClickListener {
-            onLongClick?.invoke()
+            onLongClick?.invoke(it as WineCardLink)
             true
         }
     }

@@ -1,12 +1,12 @@
 package cn.xiaowine.ui.appcompat
 
 import android.content.Context
-import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.ViewGroup
 import androidx.appcompat.widget.ListPopupWindow
+import androidx.core.content.ContextCompat
 import cn.xiaowine.ui.R
 import cn.xiaowine.ui.tools.Tools.dp
 
@@ -16,7 +16,7 @@ class HyperPopup(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Li
 
     init {
         val drawable = GradientDrawable().apply {
-            setColor(Color.WHITE)
+            setColor(ContextCompat.getColor(context, R.color.popup_background_color))
             cornerRadius = 20.dp.toFloat()
         }
         setBackgroundDrawable(drawable)
@@ -27,9 +27,6 @@ class HyperPopup(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Li
 
     }
 
-    override fun dismiss() {
-        super.dismiss()
-    }
 
     override fun show() {
         horizontalOffset = (-24).dp

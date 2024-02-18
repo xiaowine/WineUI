@@ -19,4 +19,8 @@
     <color name="progress_color">#FFFFFF</color>
     <color name="dialog_edit_background_color">#343434</color>
     <color name="edittext_hit_color">#727272</color>
+    <color name="popup_background_color">#242424</color>
+    <color name="popup_background_click_color">#454545</color>
+    <color name="popup_select_background_color">#1F2F4C</color>
+    <color name="popup_select_background_click_color">#404E67</color>
 </resources>

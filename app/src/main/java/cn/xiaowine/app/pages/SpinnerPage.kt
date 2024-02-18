@@ -22,6 +22,7 @@ class SpinnerPage : WinePage() {
                         Toast.makeText(requireContext(), "测试3", Toast.LENGTH_SHORT).show()
                     },
                 )
+
             }
             spinner {
                 title = "测试"
